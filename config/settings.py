@@ -7,3 +7,5 @@ APP_DESCRIPTION = (
 APP_ICON = "📚"
 
 PAGE_LAYOUT = "wide"
+
+BACKEND_API_URL = "http://localhost:8000"
