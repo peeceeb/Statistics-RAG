@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.ragenv/
+.venv/
+venv/
+documents/
+__pycache__/
+*.py[cod]
+.pytest_cache/
