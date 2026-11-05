@@ -1,46 +1,21 @@
+
 import streamlit as st
-import requests
 
 from chat.chat_state import (
     get_active_conversation,
     add_message
 )
 
-from config.settings import BACKEND_API_URL
-
-
-def call_chat_api(user_query, conversation):
-
-    """
-    Send the user's question to FastAPI.
-    """
-
-    url = f"{BACKEND_API_URL}/api/v1/chat/query"
-
-    payload = {
-
-        "conversation_id": conversation["conversation_id"],
-
-        "user_id": st.session_state.chat_owner,
-
-        "query": user_query
-
-    }
-
-    response = requests.post(
-        url,
-        json=payload,
-        timeout=120
-    )
-
-    response.raise_for_status()
-
-    return response.json()["answer"]
+from chat.response_service import generate_response
 
 
 def render_chat_interface():
 
     conversation = get_active_conversation()
+
+    # --------------------------------------------------
+    # Step 1: Handle empty conversation
+    # --------------------------------------------------
 
     if conversation is None:
 
@@ -60,61 +35,138 @@ def render_chat_interface():
 
         return
 
-    st.title(conversation["title"])
+    # --------------------------------------------------
+    # Step 2: Display conversation title
+    # --------------------------------------------------
 
+    st.title(conversation["title"])
     st.divider()
 
-    # Display existing messages
+    # --------------------------------------------------
+    # Step 3: Display previous messages
+    # --------------------------------------------------
+
     for message in conversation["messages"]:
 
         with st.chat_message(message["role"]):
 
             st.markdown(message["content"])
 
-    # Chat input
+            # Display sources if available
+            if message.get("sources"):
+
+                with st.expander("View source documents"):
+
+                    for index, source in enumerate(
+                        message["sources"],
+                        start=1
+                    ):
+
+                        st.markdown(
+                            f"**Source {index}: "
+                            f"{source['document_name']}**"
+                        )
+
+                        st.write(
+                            f"Page: {source.get('page_number', 'N/A')}"
+                        )
+
+                        st.caption(
+                            source.get("content", "")
+                        )
+
+                        st.divider()
+
+    # --------------------------------------------------
+    # Step 4: Accept user question
+    # --------------------------------------------------
+
     user_query = st.chat_input(
         "Ask your regulatory question...",
         key=f"chat_input_{conversation['conversation_id']}"
     )
 
-    if user_query:
+    if not user_query:
+        return
 
-        # Store user message
-        add_message(
-            role="user",
-            content=user_query
-        )
+    # --------------------------------------------------
+    # Step 5: Store user message
+    # --------------------------------------------------
 
-        # Call FastAPI
-        with st.chat_message("assistant"):
+    add_message(
+        role="user",
+        content=user_query
+    )
 
-            with st.spinner("AI is thinking..."):
+    # --------------------------------------------------
+    # Step 6: Call FastAPI backend
+    # --------------------------------------------------
 
-                try:
+    with st.chat_message("assistant"):
 
-                    answer = call_chat_api(
-                        user_query,
-                        conversation
-                    )
+        with st.spinner("Searching documents and generating answer..."):
 
-                    add_message(
-                        role="assistant",
-                        content=answer
-                    )
+            try:
 
-                    st.markdown(answer)
+                result = generate_response(
+                    user_query=user_query,
+                    conversation_id=conversation["conversation_id"],
+                    user_id=st.session_state.chat_owner
+                )
 
-                except requests.exceptions.ConnectionError:
+                answer = result["answer"]
+                sources = result.get("sources", [])
 
-                    error_message = (
-                        "Unable to connect to the backend. "
-                        "Please check whether FastAPI is running."
-                    )
+                # Display generated answer
+                st.markdown(answer)
 
-                    st.error(error_message)
+                # Display source documents
+                if sources:
 
-                except requests.exceptions.RequestException as e:
+                    with st.expander("View source documents"):
 
-                    st.error(f"API request failed: {e}")
+                        for index, source in enumerate(
+                            sources,
+                            start=1
+                        ):
 
-        st.rerun()
+                            st.markdown(
+                                f"**Source {index}: "
+                                f"{source['document_name']}**"
+                            )
+
+                            st.write(
+                                f"Page: {source.get('page_number', 'N/A')}"
+                            )
+
+                            st.caption(
+                                source.get("content", "")
+                            )
+
+                            st.divider()
+
+                # Store assistant response and sources
+                add_message(
+                    role="assistant",
+                    content=answer,
+                    sources=sources
+                )
+
+            except RuntimeError as e:
+
+                st.error(str(e))
+
+            except (KeyError, ValueError) as e:
+
+                st.error(
+                    f"Unexpected backend response: {e}"
+                )
+
+            except Exception as e:
+
+                st.error(
+                    f"An unexpected error occurred: {e}"
+                )
+
+    # Refresh the interface
+    st.rerun()

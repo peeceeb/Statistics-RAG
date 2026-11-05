@@ -1,3 +1,5 @@
+import os
+
 APP_NAME = "Statistical AI Assistant"
 
 APP_DESCRIPTION = (
@@ -8,4 +10,7 @@ APP_ICON = "📚"
 
 PAGE_LAYOUT = "wide"
 
-BACKEND_API_URL = "http://localhost:8000"
+BACKEND_API_URL = os.getenv(
+    "BACKEND_API_URL",
+    "http://localhost:8000"
+)

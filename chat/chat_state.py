@@ -1,3 +1,4 @@
+
 import streamlit as st
 
 from uuid import uuid4
@@ -19,15 +20,17 @@ def create_new_chat():
 
     conversation_id = str(uuid4())
 
+    current_time = datetime.now().isoformat()
+
     st.session_state.conversations[conversation_id] = {
 
         "conversation_id": conversation_id,
 
         "title": "New Chat",
 
-        "created_at": datetime.now().isoformat(),
+        "created_at": current_time,
 
-        "updated_at": datetime.now().isoformat(),
+        "updated_at": current_time,
 
         "messages": []
 
@@ -54,21 +57,29 @@ def get_active_conversation():
     return None
 
 
-def add_message(role: str, content: str):
+def add_message(
+    role: str,
+    content: str,
+    sources: list = None
+):
 
     conversation = get_active_conversation()
 
     if conversation is None:
         return
 
-    # Add the message
+    current_time = datetime.now().isoformat()
+
+    # Add message and source references
     conversation["messages"].append({
 
         "role": role,
 
         "content": content,
 
-        "timestamp": datetime.now().isoformat()
+        "sources": sources or [],
+
+        "timestamp": current_time
 
     })
 
@@ -82,4 +93,4 @@ def add_message(role: str, content: str):
         )
 
     # Update last activity
-    conversation["updated_at"] = datetime.now().isoformat()
+    conversation["updated_at"] = current_time
