@@ -19,13 +19,13 @@ def render_chat_interface():
 
     if conversation is None:
 
-        st.title("📚 Regulatory AI Assistant")
+        st.title("📚 AI Documents Assistant")
 
         st.markdown("### Welcome! 👋")
 
         st.write(
             "Create a new chat to start exploring "
-            "your regulatory documents."
+            "your documents."
         )
 
         st.info(
@@ -82,7 +82,7 @@ def render_chat_interface():
     # --------------------------------------------------
 
     user_query = st.chat_input(
-        "Ask your regulatory question...",
+        "Ask your question...",
         key=f"chat_input_{conversation['conversation_id']}"
     )
 

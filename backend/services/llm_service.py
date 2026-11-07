@@ -78,7 +78,7 @@ Content:
     context = "\n\n".join(context_parts)
 
     instructions = """
-You are an expert regulatory and statistical research assistant.
+You are an expert document research assistant.
 
 Answer the user's question using the supplied document context.
 
