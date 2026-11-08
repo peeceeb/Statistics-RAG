@@ -151,6 +151,8 @@ def render_chat_interface():
                     content=answer,
                     sources=sources
                 )
+                # Refresh the sidebar conversation list on the next rerun
+                st.session_state.conversations_loaded = False
 
             except RuntimeError as e:
 
