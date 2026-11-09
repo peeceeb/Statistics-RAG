@@ -8,7 +8,7 @@ def show_login_page():
 
     st.markdown(
         "Your intelligent assistant for "
-        "Statistical Analysis"
+        "Document Analysis and Summarization"
     )
 
     st.divider()
@@ -17,7 +17,7 @@ def show_login_page():
 
     st.write(
         "Sign in with your Google account "
-        "to access the Statistical AI Assistant."
+        "to access the AI Based Multi DocumentAssistant."
     )
 
     st.button(

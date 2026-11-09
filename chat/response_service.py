@@ -10,8 +10,8 @@ def generate_response(
     user_id: str
 ) -> dict:
     """
-    Sends the user's query to the FastAPI backend
-    and returns the generated answer and source references.
+    Sends the user's query to FastAPI
+    and returns the generated answer and sources.
     """
 
     url = f"{BACKEND_API_URL}/api/v1/chat/query"
@@ -52,6 +52,70 @@ def generate_response(
     except requests.exceptions.RequestException as exc:
         raise RuntimeError(
             f"An error occurred while communicating with the backend: {exc}"
+        ) from exc
+
+    except ValueError as exc:
+        raise RuntimeError(
+            "The backend returned an invalid JSON response."
+        ) from exc
+
+
+def get_conversations(user_id: str) -> list:
+    """
+    Retrieves all saved conversations belonging to a user.
+    """
+
+    url = f"{BACKEND_API_URL}/api/v1/chat/conversations"
+
+    try:
+        response = requests.get(
+            url,
+            params={"user_id": user_id},
+            timeout=30
+        )
+
+        response.raise_for_status()
+
+        return response.json()
+
+    except requests.exceptions.RequestException as exc:
+        raise RuntimeError(
+            f"Could not retrieve conversations: {exc}"
+        ) from exc
+
+    except ValueError as exc:
+        raise RuntimeError(
+            "The backend returned an invalid JSON response."
+        ) from exc
+
+
+def get_conversation_messages(
+    user_id: str,
+    conversation_id: str
+) -> list:
+    """
+    Retrieves messages belonging to a specific conversation.
+    """
+
+    url = (
+        f"{BACKEND_API_URL}/api/v1/chat/conversations/"
+        f"{conversation_id}/messages"
+    )
+
+    try:
+        response = requests.get(
+            url,
+            params={"user_id": user_id},
+            timeout=30
+        )
+
+        response.raise_for_status()
+
+        return response.json()
+
+    except requests.exceptions.RequestException as exc:
+        raise RuntimeError(
+            f"Could not retrieve conversation messages: {exc}"
         ) from exc
 
     except ValueError as exc:

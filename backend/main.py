@@ -4,8 +4,8 @@ from backend.routes.chat import router as chat_router
 
 
 app = FastAPI(
-    title="Statistical RAG API",
-    description="Backend API for Statistical AI Assistant",
+    title="RAG API",
+    description="Backend API for RAG AI Assistant",
     version="1.0.0"
 )
 
@@ -18,7 +18,7 @@ app.include_router(chat_router)
 def root():
 
     return {
-        "message": "Statistical RAG API is running"
+        "message": "RAG API is running"
     }
 
 

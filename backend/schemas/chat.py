@@ -21,5 +21,18 @@ class ChatResponse(BaseModel):
 
     conversation_id: str
     answer: str
-    sources: List[SourceReference] = []
+    sources: List[SourceReference] = Field(default_factory=list)
     status: str
+
+class ConversationResponse(BaseModel):
+    conversation_id: str
+    title: str
+    created_at: str
+    updated_at: str
+
+
+class MessageResponse(BaseModel):
+    role: str
+    content: str
+    sources: List[SourceReference] = Field(default_factory=list)
+    created_at: str

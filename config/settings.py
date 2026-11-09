@@ -1,9 +1,9 @@
 import os
 
-APP_NAME = "Statistical AI Assistant"
+APP_NAME = "AI Based Multi DocumentAssistant"
 
 APP_DESCRIPTION = (
-    "Your intelligent assistant for statistical analysis."
+    "Your intelligent assistant for managing and interacting with multiple documents seamlessly."
 )
 
 APP_ICON = "📚"
