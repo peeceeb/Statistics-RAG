@@ -1,17 +1,12 @@
 
 from sqlalchemy.orm import Session
 
-from retrieval.hybrid_search import (
-    search_documents,
-    rerank_documents
-)
-
+from backend.services.retrieval_service import search_documents
+from backend.services.reranker_service import rerank_documents
 from backend.services.llm_service import generate_answer
-
 from backend.repositories.conversation_repository import (
     get_or_create_conversation
 )
-
 from backend.repositories.message_repository import (
     save_message,
     get_conversation_messages
