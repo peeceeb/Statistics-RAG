@@ -38,6 +38,11 @@ if not is_authenticated():
 
 # Get user information
 user = get_user_details()
+st.write("Logged-in user details:")
+
+st.write("User ID:", user["user_id"])
+st.write("Name:", user["name"])
+st.write("Email:", user["email"])
 
 
 # Initialize chat state
