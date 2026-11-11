@@ -3,6 +3,7 @@ import logging
 import time
 
 from langgraph.graph import StateGraph, START, END
+from langfuse import get_client
 
 from backend.agents.state import AgentState
 from backend.agents.supervisor import supervisor_decision
@@ -41,25 +42,28 @@ from backend.agents.nodes.validation import (
 
 
 # --------------------------------------------------
-# 1. Configure logging
+# 1. Configure logging and Langfuse
 # --------------------------------------------------
 
 logger = logging.getLogger(__name__)
 
+langfuse = get_client()
+
 
 # --------------------------------------------------
-# 2. Reusable node logging wrapper
+# 2. Reusable node logging and tracing wrapper
 # --------------------------------------------------
 
 def log_node(node_name: str, node_function):
-    """
-    Wrap a LangGraph node with execution logging.
 
-    Logs:
-        - Node start
-        - Node completion
-        - Execution duration
-        - Execution errors
+    """
+    Wrap a LangGraph node with Python logging and Langfuse tracing.
+
+    Measures:
+        - Node execution duration
+        - Node execution errors
+        - Node output status
+        - Validation results
 
     Returns:
         Updated AgentState fields from the node.
@@ -76,45 +80,90 @@ def log_node(node_name: str, node_function):
 
         try:
 
-            result = node_function(state)
+            # Create an individual Langfuse observation
+            with langfuse.start_as_current_observation(
+                as_type="chain",
+                name=node_name,
+                input={
+                    "node": node_name
+                }
+            ) as node_observation:
 
-            duration = time.perf_counter() - start_time
+                # Execute the actual LangGraph node
+                result = node_function(state)
 
-            # Log execution errors returned by the node.
-            if result.get("error"):
+                duration = time.perf_counter() - start_time
 
-                logger.error(
-                    "Agent node reported an error: %s | Error: %s",
-                    node_name,
-                    result.get("error")
-                )
+                node_error = result.get("error")
 
-            else:
+                # Prepare lightweight observation output
+                observation_output = {
+                    "status": (
+                        "error" if node_error else "completed"
+                    ),
+                    "duration_seconds": round(duration, 3),
+                    "output_fields": list(result.keys())
+                }
 
-                logger.info(
-                    "Agent node completed: %s | Duration: %.2f seconds",
-                    node_name,
-                    duration
-                )
+                # Record validation result without storing full state
+                if "validation_result" in result:
 
-            # Log validation results.
-            if "validation_result" in result:
+                    validation_result = result.get(
+                        "validation_result"
+                    ) or {}
 
-                validation_result = result.get(
-                    "validation_result",
-                    {}
-                )
+                    observation_output["validation"] = {
+                        "is_valid": validation_result.get("is_valid"),
+                        "issue_count": len(
+                            validation_result.get("issues") or []
+                        )
+                    }
 
-                if validation_result:
+                # Handle errors returned by a node
+                if node_error:
 
-                    logger.info(
-                        "Validation result: valid=%s",
-                        validation_result.get("is_valid")
+                    logger.error(
+                        "Agent node reported an error: %s | Error: %s",
+                        node_name,
+                        node_error
                     )
 
-            return result
+                    node_observation.update(
+                        output=observation_output,
+                        level="ERROR",
+                        status_message=str(node_error)
+                    )
 
-        except Exception:
+                else:
+
+                    logger.info(
+                        "Agent node completed: %s | Duration: %.2f seconds",
+                        node_name,
+                        duration
+                    )
+
+                    node_observation.update(
+                        output=observation_output
+                    )
+
+                # Log validation results
+                if "validation_result" in result:
+
+                    validation_result = result.get(
+                        "validation_result",
+                        {}
+                    )
+
+                    if validation_result:
+
+                        logger.info(
+                            "Validation result: valid=%s",
+                            validation_result.get("is_valid")
+                        )
+
+                return result
+
+        except Exception as exc:
 
             duration = time.perf_counter() - start_time
 
@@ -124,6 +173,8 @@ def log_node(node_name: str, node_function):
                 duration
             )
 
+            # The observation context closes automatically.
+            # The exception is re-raised for LangGraph.
             raise
 
     return wrapper
@@ -134,6 +185,7 @@ def log_node(node_name: str, node_function):
 # --------------------------------------------------
 
 def route_supervisor(state: AgentState) -> str:
+
     """
     Route execution based on the Supervisor's decision.
     """
@@ -154,6 +206,7 @@ def route_supervisor(state: AgentState) -> str:
 # --------------------------------------------------
 
 def route_after_specialist(state: AgentState) -> str:
+
     """
     Decide whether to execute another planned task
     or generate the final response.
@@ -185,7 +238,7 @@ def build_agent_graph():
 
     workflow = StateGraph(AgentState)
 
-    # Register nodes with logging wrappers.
+    # Register nodes with logging and tracing wrappers.
 
     workflow.add_node(
         "query_understanding",
@@ -259,21 +312,21 @@ def build_agent_graph():
         )
     )
 
-    # Initial entry point.
+    # Initial entry point
 
     workflow.add_edge(
         START,
         "query_understanding"
     )
 
-    # Query understanding -> Supervisor.
+    # Query understanding -> Supervisor
 
     workflow.add_edge(
         "query_understanding",
         "supervisor"
     )
 
-    # Supervisor conditional routing.
+    # Supervisor conditional routing
 
     workflow.add_conditional_edges(
         "supervisor",
@@ -290,21 +343,21 @@ def build_agent_graph():
         }
     )
 
-    # Planning -> Supervisor.
+    # Planning -> Supervisor
 
     workflow.add_edge(
         "planning",
         "supervisor"
     )
 
-    # Retrieval -> Supervisor.
+    # Retrieval -> Supervisor
 
     workflow.add_edge(
         "retrieval",
         "supervisor"
     )
 
-    # Specialist routing.
+    # Specialist routing
 
     workflow.add_conditional_edges(
         "analysis",
@@ -333,21 +386,21 @@ def build_agent_graph():
         }
     )
 
-    # Response generation -> Validation.
+    # Response generation -> Validation
 
     workflow.add_edge(
         "response_generation",
         "validation"
     )
 
-    # Validation -> Supervisor.
+    # Validation -> Supervisor
 
     workflow.add_edge(
         "validation",
         "supervisor"
     )
 
-    # Compile workflow.
+    # Compile workflow
 
     logger.info("Compiling Enterprise RAG agent graph.")
 

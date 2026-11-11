@@ -1,9 +1,7 @@
-
 import os
-
 from dotenv import load_dotenv
 from openai import OpenAI
-
+from backend.config.settings import CHAT_MODEL
 
 # Load environment variables from .env
 load_dotenv()
@@ -188,10 +186,7 @@ CURRENT USER QUESTION:
     client = get_openai_client()
 
     response = client.responses.create(
-        model=os.getenv(
-            "OPENAI_CHAT_MODEL",
-            "gpt-5.5"
-        ),
+        model=CHAT_MODEL,
         instructions=instructions,
         input=input_text,
         max_output_tokens=1500

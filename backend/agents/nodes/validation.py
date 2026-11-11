@@ -1,8 +1,7 @@
 
 import json
 import logging
-import os
-
+from backend.config.settings import CHAT_MODEL
 from backend.agents.state import AgentState
 from backend.services.llm_service import get_openai_client
 from backend.services.source_service import get_unique_reranked_chunks
@@ -172,7 +171,7 @@ RETRIEVED DOCUMENT EVIDENCE:
         client = get_openai_client()
 
         response = client.responses.create(
-            model=os.getenv("OPENAI_CHAT_MODEL", "gpt-5.5"),
+            model=CHAT_MODEL,
             instructions=instructions,
             input=input_text,
             max_output_tokens=1000,
