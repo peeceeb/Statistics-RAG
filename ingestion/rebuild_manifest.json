@@ -1,0 +1,68 @@
+{
+    "configuration": {
+        "collection": "Internal_Docs_Rebuild",
+        "dense_model": "text-embedding-3-large",
+        "sparse_model": "Qdrant/bm25",
+        "chunk_size": 1000,
+        "chunk_overlap": 400,
+        "dense_vector_size": 3072,
+        "dense_vector_name": "",
+        "sparse_vector_name": "sparse"
+    },
+    "runs": [
+        {
+            "started_at": "2026-11-11T07:59:55.517174+00:00",
+            "mode": "TEST",
+            "status": "completed",
+            "pdfs_completed": 1,
+            "pdf_batches_completed": 1,
+            "chunks_processed": 3,
+            "points_upserted": 3,
+            "processed_sources": [
+                "Data Preparation for Data Mining Using SAS.pdf"
+            ],
+            "error": null,
+            "verification": {
+                "total_points": 3,
+                "unique_chunk_ids": 3,
+                "duplicate_points": 0,
+                "missing_chunk_ids": 0,
+                "invalid_payloads": 0,
+                "invalid_dense_vectors": 0,
+                "invalid_sparse_vectors": 0
+            },
+            "completed_at": "2026-11-11T08:00:13.646600+00:00"
+        },
+        {
+            "started_at": "2026-11-11T08:22:19.219753+00:00",
+            "mode": "FULL",
+            "status": "completed",
+            "pdfs_completed": 9,
+            "pdf_batches_completed": 5,
+            "chunks_processed": 3966,
+            "points_upserted": 3966,
+            "processed_sources": [
+                "Data Preparation for Data Mining Using SAS.pdf",
+                "Dumps for Statistical BA.pdf",
+                "Enterprise_RAG_Sparse_Retrieval_Test_Document.pdf",
+                "SAS Advanced Training - First Session -- SQL.pdf",
+                "SAS Advanced Training -- Macros.pdf",
+                "SAS Healthcare Data.pdf",
+                "SOP_cmu.pdf",
+                "Statistics -II Regression_for_Predictive_Modeling_CourseNotes.pdf",
+                "Statistics-I-Introduction-to-Anova-Regression-And-Logistic.pdf"
+            ],
+            "error": null,
+            "verification": {
+                "total_points": 3966,
+                "unique_chunk_ids": 3966,
+                "duplicate_points": 0,
+                "missing_chunk_ids": 0,
+                "invalid_payloads": 0,
+                "invalid_dense_vectors": 0,
+                "invalid_sparse_vectors": 0
+            },
+            "completed_at": "2026-11-11T08:29:33.075715+00:00"
+        }
+    ]
+}
