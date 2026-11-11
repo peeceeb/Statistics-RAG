@@ -1,21 +1,27 @@
 
 from sqlalchemy.orm import Session
 
-from retrieval.hybrid_search import (
-    search_documents,
-    rerank_documents
-)
+# LangGraph workflow
+from backend.agents.graph import agent_graph
 
-from backend.services.llm_service import generate_answer
-
+# Database repository functions
 from backend.repositories.conversation_repository import (
     get_or_create_conversation
 )
-
 from backend.repositories.message_repository import (
     save_message,
     get_conversation_messages
 )
+
+# Source deduplication helper
+from backend.services.source_service import get_unique_reranked_chunks
+
+# Langfuse tracing
+from langfuse import get_client
+
+
+# Initialize Langfuse client
+langfuse = get_client()
 
 
 def generate_chat_response(
@@ -24,41 +30,22 @@ def generate_chat_response(
     conversation_id: str,
     user_query: str
 ) -> dict:
-    """
-    Orchestrates the complete chat and RAG pipeline.
 
-    1. Create or retrieve conversation.
-    2. Retrieve previous conversation history.
-    3. Save new user message.
-    4. Update conversation title.
-    5. Retrieve relevant documents.
-    6. Rerank retrieved documents.
-    7. Generate answer using history and documents.
-    8. Prepare unique source references.
-    9. Save assistant response and sources.
-    10. Return final response.
-    """
-
-    # --------------------------------------------------
-    # Step 1: Create or retrieve conversation
-    # --------------------------------------------------
-
+    # --- STEP 1: Get or create conversation ---
     conversation = get_or_create_conversation(
         db=db,
         user_id=user_id,
         conversation_id=conversation_id
     )
 
-    # --------------------------------------------------
-    # Step 2: Retrieve previous conversation history
-    # --------------------------------------------------
-
+    # --- STEP 2: Read the last 20 messages ---
     previous_messages = get_conversation_messages(
         db=db,
         conversation_id=conversation.id,
         limit=20
     )
 
+    # Convert database messages into LLM-compatible dictionaries
     chat_history = [
         {
             "role": message.role,
@@ -67,10 +54,7 @@ def generate_chat_response(
         for message in previous_messages
     ]
 
-    # --------------------------------------------------
-    # Step 3: Save new user message
-    # --------------------------------------------------
-
+    # --- STEP 3: Save the user's new question ---
     save_message(
         db=db,
         conversation_id=conversation.id,
@@ -78,10 +62,7 @@ def generate_chat_response(
         content=user_query
     )
 
-    # --------------------------------------------------
-    # Step 4: Update conversation title
-    # --------------------------------------------------
-
+    # --- STEP 4: Set conversation title if it is new ---
     if conversation.title in ("New Conversation", "New Chat"):
 
         title = user_query.strip()
@@ -95,63 +76,93 @@ def generate_chat_response(
         db.commit()
         db.refresh(conversation)
 
-    # --------------------------------------------------
-    # Step 5: Retrieve relevant documents
-    # --------------------------------------------------
+    # --- STEP 5: Prepare initial LangGraph state ---
+    initial_state = {
+        "user_id": str(user_id),
+        "conversation_id": str(conversation.id),
+        "user_query": user_query,
+        "chat_history": chat_history,
+        "retry_count": 0,
+        "current_task_index": 0,
+        "completed_tasks": [],
+        "execution_plan": [],
+        "retrieval_complete": False
+    }
 
-    retrieved_documents = search_documents(user_query)
+    # --- STEP 6: Execute LangGraph with Langfuse tracing ---
+    with langfuse.start_as_current_observation(
+        as_type="chain",
+        name="langgraph-execution",
+        input={
+            "conversation_id": str(conversation.id),
+            "user_id": str(user_id),
+            "query": user_query
+        }
+    ) as graph_observation:
 
-    # --------------------------------------------------
-    # Step 6: Rerank retrieved documents
-    # --------------------------------------------------
+        graph_result = agent_graph.invoke(initial_state)
 
-    reranked_chunks = rerank_documents(
-        user_query,
-        retrieved_documents
+        graph_observation.update(
+            output={
+                "status": "completed",
+                "final_answer_generated": bool(
+                    graph_result.get("final_answer")
+                    or graph_result.get("generated_answer")
+                ),
+                "retrieved_document_count": len(
+                    graph_result.get("retrieved_documents") or []
+                ),
+                "reranked_chunk_count": len(
+                    graph_result.get("reranked_chunks") or []
+                )
+            }
+        )
+
+    # --- STEP 7: Extract final answer ---
+    answer = (
+        graph_result.get("final_answer")
+        or graph_result.get("generated_answer")
+        or "I couldn't generate a response. Please try again."
     )
 
-    # --------------------------------------------------
-    # Step 7: Generate answer using history + RAG
-    # --------------------------------------------------
+    # --- STEP 8: Extract reranked chunks ---
+    reranked_chunks = graph_result.get(
+        "reranked_chunks",
+        []
+    ) or []
 
-    answer = generate_answer(
-        user_query=user_query,
-        retrieved_chunks=reranked_chunks,
-        chat_history=chat_history
-    )
+    # --- STEP 9: Remove duplicate chunks ---
+    unique_chunks = get_unique_reranked_chunks(reranked_chunks)
 
-    # --------------------------------------------------
-    # Step 8: Prepare unique source references
-    # --------------------------------------------------
-
+    # --- STEP 10: Build citation/source list ---
     sources = []
-    seen_chunk_ids = set()
 
-    for chunk in reranked_chunks:
+    for chunk in unique_chunks:
 
-        metadata = chunk.get("meta", {})
-
-        chunk_id = metadata.get("chunk_id")
-
-        if chunk_id and chunk_id in seen_chunk_ids:
-            continue
-
-        if chunk_id:
-            seen_chunk_ids.add(chunk_id)
+        metadata = chunk.get("meta") or {}
 
         source_path = metadata.get(
             "source",
             "Unknown document"
         )
 
+        # Extract filename from source path
         document_name = (
-            source_path.replace("\\", "/").split("/")[-1]
+            str(source_path)
+            .replace("\\", "/")
+            .split("/")[-1]
         )
 
         page_number = metadata.get("page")
 
+        # Convert zero-based page number to one-based page number
         if page_number is not None:
-            page_number = int(page_number) + 1
+
+            try:
+                page_number = int(page_number) + 1
+
+            except (TypeError, ValueError):
+                pass
 
         sources.append({
             "document_name": document_name,
@@ -160,10 +171,7 @@ def generate_chat_response(
             "score": float(chunk.get("score", 0.0))
         })
 
-    # --------------------------------------------------
-    # Step 9: Save assistant response and sources
-    # --------------------------------------------------
-
+    # --- STEP 11: Save assistant response and sources ---
     save_message(
         db=db,
         conversation_id=conversation.id,
@@ -172,10 +180,7 @@ def generate_chat_response(
         sources=sources
     )
 
-    # --------------------------------------------------
-    # Step 10: Return final response
-    # --------------------------------------------------
-
+    # --- STEP 12: Return result to API caller ---
     return {
         "answer": answer,
         "sources": sources,

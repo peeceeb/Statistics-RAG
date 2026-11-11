@@ -1,0 +1,477 @@
+
+Query: ERR-503
+Executing hybrid retrieval...
+
+Documents retrieved: 20
+
+============================================================
+Result: 1
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 240
+Chunk ID: acd08480a7517753daa2e717713aab0594756727b6a7030c87bd2ce75bf4774e
+Content:
+Place of Service codes for  207û210t 
+for professional providers  30 
+EIN, as provider ID  33t 
+Electronic Data Interchange (EDI), defined  196 
+electronic eligibility inquiry  130û131 
+electronic format  84û86 
+Electronic Health Record (EHR)  178 
+Electronic Medical Record (EMR)  178 
+eligibility 
+exclusions to  157 
+of members  130 
+eligible population, in HEDIS  155t, 156û157 
+emergency rooms, Place of Service codes for  208t 
+encounters  197 
+See also claims 
+See also visit 
+END macro variable  140 
+END= option  124 
+EndDOS variable  76û80 
+end-stage renal disease treatment facilities, Place of 
+Service codes for  210t 
+Enhanced Therapeutic Classification System (ETC)  
+88 
+enrollment, o
+Exact keyword match: NO
+
+============================================================
+Result: 2
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\Enterprise_RAG_Sparse_Retrieval_Test_Document.pdf
+Page: 0
+Chunk ID: 77d34e6b8799772d02fc40eff35fd9a7f8b614aaaca3057bf9b1aca1c85f4c1c
+Content:
+ Sparse embeddings using a BM25-based sparse encoder.
+ The resulting vectors are stored in the Qdrant vector database.
+2. Sparse Retrieval
+Sparse retrieval identifies relevant documents using keyword-level matching.
+Important terminology:
+  Sparse vectors
+  BM25
+  Term frequency
+  Inverse document frequency
+  Keyword matching
+  Exact identifier matching
+  Tokenization
+ The retrieval service uses sparse vectors to identify documents containing relevant technical terms.
+3. Dense Retrieval
+Dense retrieval uses semantic embeddings to identify documents based on contextual similarity.
+The embedding model is text-embedding-3-large, which generates 3072-dimensional vectors.
+4. Hybrid Retrie
+Exact keyword match: YES
+
+============================================================
+Result: 3
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\Enterprise_RAG_Sparse_Retrieval_Test_Document.pdf
+Page: 1
+Chunk ID: d660da006000dc1379cbe00b6acddab27d53d70d3de22bc86d925987ebe91552
+Content:
+Enterprise RAG | Sparse Retrieval Test
+Page 2
+ ERR-401: Authentication failure.
+  DOC-1001: Sparse retrieval documentation.
+  MODEL-2026: Embedding model configuration.
+ 
+6. System Components
+The Enterprise RAG application uses:
+  Python for backend development.
+  FastAPI for REST APIs.
+  Streamlit for the user interface.
+  LangGraph for agent orchestration.
+  Qdrant for vector storage.
+  FlashRank for reranking.
+  PostgreSQL for conversation persistence.
+ 
+7. Performance Configuration
+The retrieval configuration uses:
+  RETRIEVAL_TOP_K = 20
+  FINAL_TOP_K = 5
+  EMBEDDING_DIMENSION = 3072
+  RERANKER = ms-marco-MiniLM-L-12-v2
+ 
+8. Summary
+Sparse retrieval improves exact keyword m
+Exact keyword match: NO
+
+============================================================
+Result: 4
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 240
+Chunk ID: acd08480a7517753daa2e717713aab0594756727b6a7030c87bd2ce75bf4774e
+Content:
+Place of Service codes for  207û210t 
+for professional providers  30 
+EIN, as provider ID  33t 
+Electronic Data Interchange (EDI), defined  196 
+electronic eligibility inquiry  130û131 
+electronic format  84û86 
+Electronic Health Record (EHR)  178 
+Electronic Medical Record (EMR)  178 
+eligibility 
+exclusions to  157 
+of members  130 
+eligible population, in HEDIS  155t, 156û157 
+emergency rooms, Place of Service codes for  208t 
+encounters  197 
+See also claims 
+See also visit 
+END macro variable  140 
+END= option  124 
+EndDOS variable  76û80 
+end-stage renal disease treatment facilities, Place of 
+Service codes for  210t 
+Enhanced Therapeutic Classification System (ETC)  
+88 
+enrollment, o
+Exact keyword match: NO
+
+============================================================
+Result: 5
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 240
+Chunk ID: e8b8bc99d06c40c96a2b484e9e563d1c78d08d06fee56ddfd7d5e0064a0affb3
+Content:
+Service codes for  210t 
+Enhanced Therapeutic Classification System (ETC)  
+88 
+enrollment, of members  129û130 
+Enterprise Data Warehouse (EDW)  5 
+Entity Type Code  32t 
+episode, defined  197 
+episode of care 
+See visit 
+ER utilization, reasons for  53û55 
+%EVAL function  164 
+Evaluation and Management (E/M), defined  197 
+event/diagnosis, in HEDIS  157 
+"evidence presented"  5 
+experience rating  133t 
+extended coding 
+about  181 
+arrays of detail record elements on header 
+record  187û190 
+linking to diagnosis pointer  190û193 
+utility macros  181û187
+Exact keyword match: NO
+
+============================================================
+Result: 6
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 240
+Chunk ID: e8b8bc99d06c40c96a2b484e9e563d1c78d08d06fee56ddfd7d5e0064a0affb3
+Content:
+Service codes for  210t 
+Enhanced Therapeutic Classification System (ETC)  
+88 
+enrollment, of members  129û130 
+Enterprise Data Warehouse (EDW)  5 
+Entity Type Code  32t 
+episode, defined  197 
+episode of care 
+See visit 
+ER utilization, reasons for  53û55 
+%EVAL function  164 
+Evaluation and Management (E/M), defined  197 
+event/diagnosis, in HEDIS  157 
+"evidence presented"  5 
+experience rating  133t 
+extended coding 
+about  181 
+arrays of detail record elements on header 
+record  187û190 
+linking to diagnosis pointer  190û193 
+utility macros  181û187
+Exact keyword match: NO
+
+============================================================
+Result: 7
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 5
+Chunk ID: 4f05608b0b21206e648033f62c6437e16678f6f0a4e9c51c2d49e00dd884d5d3
+Content:
+Electronic Eligibility Inquiry .................................................................................................................. 130 
+Changing Member ID ............................................................................................................................ 131 
+ôCross-Clientö Projects ........................................................................................................................ 131 
+Householding ......................................................................................................................................... 131
+Exact keyword match: NO
+
+============================================================
+Result: 8
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 5
+Chunk ID: 4f05608b0b21206e648033f62c6437e16678f6f0a4e9c51c2d49e00dd884d5d3
+Content:
+Electronic Eligibility Inquiry .................................................................................................................. 130 
+Changing Member ID ............................................................................................................................ 131 
+ôCross-Clientö Projects ........................................................................................................................ 131 
+Householding ......................................................................................................................................... 131
+Exact keyword match: NO
+
+============================================================
+Result: 9
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 224
+Chunk ID: 7747190459a551fa6d7824443dc01e30eae6626b4226dfd13776085a723af36f
+Content:
+Appendix  211 
+ 
+Status 
+Code 
+Description 
+43 Discharged/transferred to a Federal hospital 
+50 Discharged/transferred to Hospiceùhome 
+51 Discharged/transferred to Hospiceùmedical facility 
+61 Discharged/transferred to a hospital-based Medicare approved swing bed 
+62 Discharged/transferred to an inpatient rehabilitation facility including distinct part units of a 
+hospital 
+63 Discharged/transferred to long-term care hospital 
+64 Discharged/transferred to a nursing facility certified under Medicaid but not Medicare 
+65 Discharged/transferred to a psychiatric hospital or psychiatric distinct part unit of a hospital 
+66 Discharged/transferred to a Critical Access Hospital 
+69 Discharged/trans
+Exact keyword match: NO
+
+============================================================
+Result: 10
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 224
+Chunk ID: 7747190459a551fa6d7824443dc01e30eae6626b4226dfd13776085a723af36f
+Content:
+Appendix  211 
+ 
+Status 
+Code 
+Description 
+43 Discharged/transferred to a Federal hospital 
+50 Discharged/transferred to Hospiceùhome 
+51 Discharged/transferred to Hospiceùmedical facility 
+61 Discharged/transferred to a hospital-based Medicare approved swing bed 
+62 Discharged/transferred to an inpatient rehabilitation facility including distinct part units of a 
+hospital 
+63 Discharged/transferred to long-term care hospital 
+64 Discharged/transferred to a nursing facility certified under Medicaid but not Medicare 
+65 Discharged/transferred to a psychiatric hospital or psychiatric distinct part unit of a hospital 
+66 Discharged/transferred to a Critical Access Hospital 
+69 Discharged/trans
+Exact keyword match: NO
+
+============================================================
+Result: 11
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 240
+Chunk ID: de92a4b5c3a754fba1767587d176a1567ad347c3b923b15c4194f1bb30b5fb2e
+Content:
+See Diagnosis Related Group (DRG) 
+driver table  155 
+Drug Listing Act (1972)  86û87 
+Drug Utilization Review (DUR), defined  196 
+"dual eligibles"  26 
+Durable Medical Equipment (DME)  31, 196 
+DUR/PPS segment, on pharmacy claims  85t 
+E 
+Early and Periodic Screening, Diagnosis, and 
+Treatment (EPSDT), defined  196 
+E-codes  106 
+837I electronic claim format 
+about  5, 40 
+for facilities  30 
+patient status codes for  210û211t 
+revenue codes for  211û223t 
+837P electronic claim format 
+about  5, 60 
+for ancillary providers  31 
+data elements unique to  60û62 
+Place of Service codes for  207û210t 
+for professional providers  30 
+EIN, as provider ID  33t 
+Electronic Data Interchange (EDI), de
+Exact keyword match: NO
+
+============================================================
+Result: 12
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 240
+Chunk ID: de92a4b5c3a754fba1767587d176a1567ad347c3b923b15c4194f1bb30b5fb2e
+Content:
+See Diagnosis Related Group (DRG) 
+driver table  155 
+Drug Listing Act (1972)  86û87 
+Drug Utilization Review (DUR), defined  196 
+"dual eligibles"  26 
+Durable Medical Equipment (DME)  31, 196 
+DUR/PPS segment, on pharmacy claims  85t 
+E 
+Early and Periodic Screening, Diagnosis, and 
+Treatment (EPSDT), defined  196 
+E-codes  106 
+837I electronic claim format 
+about  5, 40 
+for facilities  30 
+patient status codes for  210û211t 
+revenue codes for  211û223t 
+837P electronic claim format 
+about  5, 60 
+for ancillary providers  31 
+data elements unique to  60û62 
+Place of Service codes for  207û210t 
+for professional providers  30 
+EIN, as provider ID  33t 
+Electronic Data Interchange (EDI), de
+Exact keyword match: NO
+
+============================================================
+Result: 13
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 209
+Chunk ID: ea1caaf23d32511c793f1c5488cf90d1b18034d0591a6b0bb05aaf0960dead63
+Content:
+other intervals as necessary in order to determine the existence of physical or mental illnesses or conditions. 
+Plans offering Medicaid coverage to EPSDT participants must provide any service that is necessary to treat 
+an illness or condition that is identified by screening. 
+Electronic Data Interchange (EDI) 
+A protocol for the exchange of standardized document forms between computer systems for business use.
+Exact keyword match: NO
+
+============================================================
+Result: 14
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 209
+Chunk ID: ea1caaf23d32511c793f1c5488cf90d1b18034d0591a6b0bb05aaf0960dead63
+Content:
+other intervals as necessary in order to determine the existence of physical or mental illnesses or conditions. 
+Plans offering Medicaid coverage to EPSDT participants must provide any service that is necessary to treat 
+an illness or condition that is identified by screening. 
+Electronic Data Interchange (EDI) 
+A protocol for the exchange of standardized document forms between computer systems for business use.
+Exact keyword match: NO
+
+============================================================
+Result: 15
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 234
+Chunk ID: 1a6c7aab980d81a0bddb02b8aa980b493242be562c64f373cf9fd0b59e9f4342
+Content:
+0835 Peritoneal DialysisùOutpatient or HomeùSupport Services 
+0839 Peritoneal DialysisùOutpatient or HomeùOther Outpatient Peritoneal Dialysis 
+0840 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùGeneral 
+0841 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùComposite Rate 
+0842 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùSupplies 
+0843 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùEquipment 
+0844 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùMaintenance 
+0845 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùSupport Services 
+0849 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùOther 
+0850 Continuous C
+Exact keyword match: NO
+
+============================================================
+Result: 16
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 234
+Chunk ID: 1a6c7aab980d81a0bddb02b8aa980b493242be562c64f373cf9fd0b59e9f4342
+Content:
+0835 Peritoneal DialysisùOutpatient or HomeùSupport Services 
+0839 Peritoneal DialysisùOutpatient or HomeùOther Outpatient Peritoneal Dialysis 
+0840 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùGeneral 
+0841 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùComposite Rate 
+0842 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùSupplies 
+0843 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùEquipment 
+0844 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùMaintenance 
+0845 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùSupport Services 
+0849 Continuous Ambulatory Peritoneal Dialysis (CAPD)ùOP or HomeùOther 
+0850 Continuous C
+Exact keyword match: NO
+
+============================================================
+Result: 17
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 66
+Chunk ID: 20f8d0b541d22059e2f96bedce10f17db8adb9e548680798f1254b16bd32b3cb
+Content:
+AmtPaid as a line in addition to a bar display of C-section rate.  
+ Case Study: Top Reasons for ER Utilization 
+Healthy Living, Inc., closely monitors its membersÆ ER utilization because ER visits cost more than their usual 
+alternatives: urgent or primary care. As a first step in reducing ER utilization, the company wants to understand 
+why its members are using the ER.  
+This section shows you how to list top diagnosis codes associated with ER visits. This process involves three 
+separate conceptual steps:  
+1. Identify ER claims using revenue codes in FacilityDetail table.  
+2. Join with FacilityHeader on ClaimID. 
+3. Summarize visits by primary diagnosis code (PDX). 
+ 
+Follow the steps 
+Exact keyword match: NO
+
+============================================================
+Result: 18
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 66
+Chunk ID: 20f8d0b541d22059e2f96bedce10f17db8adb9e548680798f1254b16bd32b3cb
+Content:
+AmtPaid as a line in addition to a bar display of C-section rate.  
+ Case Study: Top Reasons for ER Utilization 
+Healthy Living, Inc., closely monitors its membersÆ ER utilization because ER visits cost more than their usual 
+alternatives: urgent or primary care. As a first step in reducing ER utilization, the company wants to understand 
+why its members are using the ER.  
+This section shows you how to list top diagnosis codes associated with ER visits. This process involves three 
+separate conceptual steps:  
+1. Identify ER claims using revenue codes in FacilityDetail table.  
+2. Join with FacilityHeader on ClaimID. 
+3. Summarize visits by primary diagnosis code (PDX). 
+ 
+Follow the steps 
+Exact keyword match: NO
+
+============================================================
+Result: 19
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 233
+Chunk ID: d453a79ef330caedc58849e942576cb90524582114b48d7657431c06f43cbc34
+Content:
+0710 Recovery RoomùGeneral 
+0720 Labor Room/DeliveryùGeneral 
+0721 Labor Room/DeliveryùLabor 
+0722 Labor Room/DeliveryùDelivery 
+0723 Labor Room/DeliveryùCircumcision 
+0724 Labor Room/DeliveryùBirthing Center 
+0729 Labor Room/DeliveryùOther Labor Room/Delivery 
+0730 EKG/ECG (Electrocardiogram)ùGeneral 
+0731 EKG/ECG (Electrocardiogram)ùHolter Monitor 
+0732 EKG/ECG (Electrocardiogram)ùTelemetry 
+0739 EKG/ECG (Electrocardiogram)ùOther EKG/ECG 
+0740 EEG (Electroencephalogram)ùGeneral 
+0750 Gastrointestinal ServicesùGeneral 
+0760 Specialty ServicesùGeneral 
+0761 Specialty ServicesùTreatment Room 
+0762 Specialty ServicesùObservation Hours 
+0769 Specialty ServicesùOther Specialty Services 
+0770 Pre
+Exact keyword match: NO
+
+============================================================
+Result: 20
+Source: C:\Users\User\Desktop\Sandbox\09_Small_Projects\Enterprise_RAG\documents\internal\SAS Healthcare Data.pdf
+Page: 233
+Chunk ID: d453a79ef330caedc58849e942576cb90524582114b48d7657431c06f43cbc34
+Content:
+0710 Recovery RoomùGeneral 
+0720 Labor Room/DeliveryùGeneral 
+0721 Labor Room/DeliveryùLabor 
+0722 Labor Room/DeliveryùDelivery 
+0723 Labor Room/DeliveryùCircumcision 
+0724 Labor Room/DeliveryùBirthing Center 
+0729 Labor Room/DeliveryùOther Labor Room/Delivery 
+0730 EKG/ECG (Electrocardiogram)ùGeneral 
+0731 EKG/ECG (Electrocardiogram)ùHolter Monitor 
+0732 EKG/ECG (Electrocardiogram)ùTelemetry 
+0739 EKG/ECG (Electrocardiogram)ùOther EKG/ECG 
+0740 EEG (Electroencephalogram)ùGeneral 
+0750 Gastrointestinal ServicesùGeneral 
+0760 Specialty ServicesùGeneral 
+0761 Specialty ServicesùTreatment Room 
+0762 Specialty ServicesùObservation Hours 
+0769 Specialty ServicesùOther Specialty Services 
+0770 Pre
+Exact keyword match: NO
+
+Hybrid retrieval test completed.
