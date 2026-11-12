@@ -1,3 +1,4 @@
+
 import sys
 from pathlib import Path
 
@@ -6,7 +7,6 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import time
-from pathlib import Path
 from datetime import datetime
 from statistics import mean
 
@@ -20,8 +20,13 @@ from langchain_openai import OpenAIEmbeddings
 from qdrant_client import QdrantClient
 
 from backend.services.reranker_service import rerank_documents
+
 from benchmarking.evaluation.evaluators.retrieval_metrics import (
     calculate_retrieval_metrics
+)
+
+from benchmarking.evaluation.evaluators.evaluation_history import (
+    record_evaluation
 )
 
 load_dotenv()
@@ -295,6 +300,12 @@ report = {
 
 with open(report_path, "w", encoding="utf-8") as f:
     json.dump(report, f, indent=4, ensure_ascii=False)
+
+# Update evaluation history without affecting the benchmark result.
+try:
+    record_evaluation(report_path)
+except Exception as exc:
+    print(f"WARNING: Could not update evaluation history: {exc}")
 
 # --------------------------------------------------
 # FINAL SUMMARY

@@ -1,3 +1,4 @@
+
 from pathlib import Path
 import sys
 import json
@@ -25,6 +26,11 @@ from backend.services.llm_service import get_openai_client
 from backend.services.reranker_service import rerank_documents
 from backend.agents.nodes.response_generation import (
     response_generation_node
+)
+
+# Evaluation history tracker
+from benchmarking.evaluation.evaluators.evaluation_history import (
+    record_evaluation
 )
 
 
@@ -655,6 +661,18 @@ def main():
             file,
             indent=4,
             ensure_ascii=False
+        )
+
+    # Update evaluation history.
+    # A CSV failure must not invalidate the JSON report.
+    try:
+
+        record_evaluation(report_path)
+
+    except Exception as exc:
+
+        print(
+            f"WARNING: Could not update evaluation history: {exc}"
         )
 
     # Final summary
