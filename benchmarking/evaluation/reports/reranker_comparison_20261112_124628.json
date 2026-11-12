@@ -1,0 +1,50 @@
+{
+    "timestamp": "2026-11-12T07:16:28.717346+00:00",
+    "collection": "Internal_Docs_Rebuild",
+    "query": "Section 3.3 multiple regression ANOVA output: Performance and Runtime predicting oxygen consumption. Find the Model F Value, Pr > F, and R-Square.",
+    "retrieval_top_k": 20,
+    "retrieval_latency_seconds": 1.3061,
+    "candidate_chunk_ids": [
+        "023fbe295bce7078f9d3b2c43d55a45ea727bd6016b0ec0ae6647ba28bf184a3",
+        "74e348f263443fa667b53d7110c52129b7e8a69097b582c244f11cdcf6f885b6",
+        "a19283b6f003df997e1bcb131d3551ca827910a078adede4f4992cd0990e83ff",
+        "f73568220e29ff6e8af713bd68fd54405186a48007c7c740ac9c1fe66272ed19",
+        "78f7f203fca8913793b9a22ccb1da5947ce7328389745c6d8f2d6852f1bdcb79",
+        "cc6d699a25b71fda1ce96486ba6cb09e83be8bef767671405f536de507493789",
+        "088bb7a15555221c7bf7f6b4d9fe33b04c58c1598d32359e0d8f3132984f7f00",
+        "bf1bbdd11a6624ae230dca77ee51d3dc1bcefac611e97809d7d41d91f6332c9f",
+        "00add74d1f69588e1d4be872cf804158dc7388ce4fd0b35524a41e0f16705224",
+        "e35bd0f5bc6f2875ec3a8d280225c4ca00a371e7620071c0cee1c2e5b906758d",
+        "e75b89704e0008b354f1872a28c0035a1194915a953c250b2d90e1f5ef3da4b6",
+        "d9d54222b1728d4eff5fd3063919e8ea7348f79c7ce8d65e59aef9d4d17b7cb5",
+        "78234592b51c31b028aac29dee6591ddf5ad3ee2db78d34be0fde7c4a917796e",
+        "e959d61a97feaa9cee71c7cf1f4ac9f6a6129edc25018a981c10defddc95ffb9",
+        "c4bda53186c64f1be6c45401318faf35c61bcd0493a5535e3c8b20d3779d1037",
+        "9d37f49070e390703fff2d205b941d7df727335c7a941e21149ce79643ae7ae8",
+        "c44e03015c1ff265a9ac70d6f381d9a53c2bfd76d2474354a6606accd47fe7aa",
+        "37c4cdca2edaf9cf5f01295352f5f350ce7783a3b184b32d292c4928cdb71907",
+        "c1c8af08b15863c2f6ed5a9dec3e22111dbdc082a3cc1d06238f3024b169c3ee",
+        "6b503d3c6d7d227f6d3efcd1d83c0694373c3fa77362a3ac72fe144ba5e0711c"
+    ],
+    "expected_chunk_ids": [
+        "74e348f263443fa667b53d7110c52129b7e8a69097b582c244f11cdcf6f885b6",
+        "bf1bbdd11a6624ae230dca77ee51d3dc1bcefac611e97809d7d41d91f6332c9f",
+        "e35bd0f5bc6f2875ec3a8d280225c4ca00a371e7620071c0cee1c2e5b906758d"
+    ],
+    "flashrank_model": "ms-marco-MiniLM-L-12-v2",
+    "bge_model": "BAAI/bge-reranker-base",
+    "comparison": {
+        "flashrank": {
+            "top5_expected_found": 0,
+            "top10_expected_found": 2,
+            "exact_anova_chunk_rank": 20,
+            "inference_latency_seconds": 4.5868
+        },
+        "bge": {
+            "top5_expected_found": 0,
+            "top10_expected_found": 3,
+            "exact_anova_chunk_rank": 9,
+            "inference_latency_seconds": 12.3902
+        }
+    }
+}

@@ -1,0 +1,1249 @@
+{
+    "evaluation_timestamp": "2026-11-12T13:19:39.612491",
+    "collection": "Internal_Docs_Rebuild",
+    "dataset": "benchmarking\\evaluation\\datasets\\retrieval_eval_v1.jsonl",
+    "total_questions": 20,
+    "retrieval_method": "Dense + BM25 + RRF",
+    "embedding_model": "text-embedding-3-large",
+    "sparse_model": "Qdrant/bm25",
+    "reranker_model": "ms-marco-MiniLM-L-12-v2",
+    "retrieval_top_k": 20,
+    "final_top_k": 5,
+    "initial_retrieval_metrics": {
+        "precision_at_k": 0.0475,
+        "recall_at_k": 0.95,
+        "reciprocal_rank": 0.8333,
+        "ndcg_at_k": 0.8631
+    },
+    "reranked_metrics": {
+        "precision_at_k": 0.19,
+        "recall_at_k": 0.95,
+        "reciprocal_rank": 0.8042,
+        "ndcg_at_k": 0.8412
+    },
+    "average_retrieval_latency_seconds": 1.2974,
+    "average_reranking_latency_seconds": 4.1595,
+    "total_duration_seconds": 109.15,
+    "results": [
+        {
+            "id": "RAG-001",
+            "question": "What are the overall F statistic, p-value, and R-squared value in the regression output?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "bf1bbdd11a6624ae230dca77ee51d3dc1bcefac611e97809d7d41d91f6332c9f",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "74e348f263443fa667b53d7110c52129b7e8a69097b582c244f11cdcf6f885b6",
+                "088bb7a15555221c7bf7f6b4d9fe33b04c58c1598d32359e0d8f3132984f7f00",
+                "e35bd0f5bc6f2875ec3a8d280225c4ca00a371e7620071c0cee1c2e5b906758d",
+                "78f7f203fca8913793b9a22ccb1da5947ce7328389745c6d8f2d6852f1bdcb79",
+                "37c4cdca2edaf9cf5f01295352f5f350ce7783a3b184b32d292c4928cdb71907",
+                "ceac0150d0d672028abfd408e554a78a13c7fe0817b31eb12c5578e58c83e21b",
+                "2bbc28413830616fe8ed6b82fcf1faebf517b717651d0a0bbff5ac71d2a63974",
+                "c44e03015c1ff265a9ac70d6f381d9a53c2bfd76d2474354a6606accd47fe7aa",
+                "6c0bee307d133908796e1554d2372652b07ea9b600c455799d633b70890eaa9c",
+                "1e2633206cda247adcf043da3438f5b13a524176e4775d69020bb4e14bd2b4a0",
+                "6e50c22ad78fcff4ac5c98b5eff0a7e16e3128d19f414065c0706400e3aca7d6",
+                "6b503d3c6d7d227f6d3efcd1d83c0694373c3fa77362a3ac72fe144ba5e0711c",
+                "24b70273d16dc450c84029996331ffd637370bbe0c38301f03bf8a4aef1c2689",
+                "a8d33cb633b046c7233d7b5c4deaab2675c698d8062a95543171c2b95ce1015e",
+                "116f81ebd248338b90c723cf3d7de13cabc3ef8cf7ee72f69ef7f8c60f8725a2",
+                "a533c5728c649fd9323310447a44246b82225c424c59f8ad0df053d256277f12",
+                "78234592b51c31b028aac29dee6591ddf5ad3ee2db78d34be0fde7c4a917796e",
+                "2310cfc5768257bcd8d8feb4c94afdae7f6e5c6bf11b18cb96a389d40541670e",
+                "e75b89704e0008b354f1872a28c0035a1194915a953c250b2d90e1f5ef3da4b6",
+                "cc6d699a25b71fda1ce96486ba6cb09e83be8bef767671405f536de507493789"
+            ],
+            "reranked_chunk_ids": [
+                "088bb7a15555221c7bf7f6b4d9fe33b04c58c1598d32359e0d8f3132984f7f00",
+                "a533c5728c649fd9323310447a44246b82225c424c59f8ad0df053d256277f12",
+                "78f7f203fca8913793b9a22ccb1da5947ce7328389745c6d8f2d6852f1bdcb79",
+                "6b503d3c6d7d227f6d3efcd1d83c0694373c3fa77362a3ac72fe144ba5e0711c",
+                "c44e03015c1ff265a9ac70d6f381d9a53c2bfd76d2474354a6606accd47fe7aa"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.0,
+                "recall_at_k": 0.0,
+                "reciprocal_rank": 0.0,
+                "ndcg_at_k": 0.0,
+                "relevant_retrieved": 0,
+                "relevant_total": 1,
+                "first_relevant_rank": null,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.0,
+                "recall_at_k": 0.0,
+                "reciprocal_rank": 0.0,
+                "ndcg_at_k": 0.0,
+                "relevant_retrieved": 0,
+                "relevant_total": 1,
+                "first_relevant_rank": null,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.6999,
+            "reranking_latency_seconds": 2.6555
+        },
+        {
+            "id": "RAG-002",
+            "question": "In the GPA regression exercise, which variable is the response variable and which is the predictor?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "307291dce3038cbcde82f1e0b24eca166d1723ec8c724fddbdcb059f33bce2d6",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "307291dce3038cbcde82f1e0b24eca166d1723ec8c724fddbdcb059f33bce2d6",
+                "c78228526dd830566c5abd9cc336bf5d3444146d08b32f34a723ac661883a75d",
+                "9ea2c8dd71c7b3dcf864a67c613307550bc45159add5d54845bd367265117b36",
+                "507f0ae6edfe0c556deb13eec00a0ee9d346413fecc1af4f3f789d18b03ab31d",
+                "6cc478bfbab56c70e9bb554bf687d23fd93b101379cef86e4f7eb8648af373e5",
+                "b1e67fad758fa8f257f46699e145430586256c3da32b8ed76206be3256cf5d58",
+                "a9a57320c9cb9b72f408ecfde15fa120b762f0b22546f0e0df7920a99b962934",
+                "16440a338f8f8c2ed3a99abbdc0f80d5dbeb57953639a848728d76efc8cbce76",
+                "473062efaac1cc34268d6fef9b4e71da36be8a55ba24623eafa7714f87a9abcd",
+                "808a03645b8d1d133ee7d73ee79bab66c772e6f702242212941770b8adc37446",
+                "83f6e7d8352bebc2528f7f3ddefa5ba36913910e9ff301496b09bdaef63635c4",
+                "0dd0071e31336d80395b14a80bfd9a6639af14d328b4934e7c8a0236839bb442",
+                "e7a5fc12d162e3f0bf175e4f2d0be0c021ba31262078a67d077e25dfd16d1ced",
+                "5205747db84013325269bb2fd030461e3294e0522e2bfae065060ab66f27c404",
+                "501935dde9c12efdedbc6d60446790c6362472aba25f043c1b637085aa77f358",
+                "284384031854794c3d36fc1342c3af845c9263fefc882e81595b3cabbcdcdf47",
+                "f78dcfb98bb7e687bc140ccc3c5dbd249d0d19c703cdb71d57d7225da80735b5",
+                "23ccd9bc900ab5b151f0c76fef84f5fdbb7613a43e5c53ed3f8e9c45e28c602f",
+                "3a38fd84017d2a302f5197aa4799da5675e53598dda94e1e0f20884771916fd8",
+                "0731e91c0c6eff90afb9a2fb0b2a9fb454429c138b9b16d861e89a8b7850465f"
+            ],
+            "reranked_chunk_ids": [
+                "e7a5fc12d162e3f0bf175e4f2d0be0c021ba31262078a67d077e25dfd16d1ced",
+                "b1e67fad758fa8f257f46699e145430586256c3da32b8ed76206be3256cf5d58",
+                "307291dce3038cbcde82f1e0b24eca166d1723ec8c724fddbdcb059f33bce2d6",
+                "507f0ae6edfe0c556deb13eec00a0ee9d346413fecc1af4f3f789d18b03ab31d",
+                "9ea2c8dd71c7b3dcf864a67c613307550bc45159add5d54845bd367265117b36"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.3333333333333333,
+                "ndcg_at_k": 0.5,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 3,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.851,
+            "reranking_latency_seconds": 3.58
+        },
+        {
+            "id": "RAG-003",
+            "question": "According to the control plot, which groups are not significantly different from each other?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "b8cb9c47ca06cb7b6c5a9d0073587f7f70dcbf675ceca43c40d9e44accc7a276",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "b8cb9c47ca06cb7b6c5a9d0073587f7f70dcbf675ceca43c40d9e44accc7a276",
+                "d983b45471d15102de75020f6df55041ca172f229997629ce04b991903fcc15a",
+                "425567735c471cb3e9972814b0875c6fe2152e86624bd43700eb8cbc8a1e4635",
+                "c42a9d98578f952ba3b77c2d7e20f4c01dd0e4ad279b275336d675215ff3e702",
+                "35c621f3b746375fb9aed9b6fbb79874d883cfd8e1012d6f16206cb09960d9dc",
+                "896fc64f09a6a10fe092df536bf426a9b29ec721f7d7a5c08e1a6d51d21f5d0a",
+                "eaff91be01da107ffcd2bb21e0dcec032144fc9875d6a75f3884d0ded804f38e",
+                "a3671432657cd721c7c9493c772f05d8e961238e9fc5e7d53c171727ef7d313e",
+                "07339dc08fbb852b16b55ca8550eae2cf4a0dc3ab331a3cca3aaa213f4ca327a",
+                "7bb9a2567ea643858e9db0a7bd62a6b89e1a67a107a7fc53960fd124f3396a4b",
+                "a84720f053302be96088c52aaba0b0ccc3e378d2f4cfc2bc9f8b1361f1a1b9f2",
+                "7a823a1f567f3983659be1268b6bc75ec0889012a4a7744c45dc6ef10c5cffb5",
+                "1323cb145469653627ff89f376c6306f15b3a05001c86dbd6d854a8ec0dbac29",
+                "ef28463f55a39ebd77b7bb1b076cfef2bca1cabc08f68a37fbb7dea96ad9ec12",
+                "802c0e41f6a868dea2d39ddcbff596b1b8ad548f2b554696d008bfc3c4f7fa25",
+                "69b2cc53a2f352d022658f4b1af2c4cde6e3ad956b988253d3ec254a9d6cc0be",
+                "24141d8f6f41260c7c83d262b9e1185591babb27b3b10ab38a886c0b460874fa",
+                "ccd1f4f2d456020d8a7654f113c3f46b5d807e00f9e825e39c69cef01500c3f8",
+                "d2c66dc64f34acb9d2e29d8184a37debb5d21ebcf48020988f467c8f027388e2",
+                "135dc695914bbe5ffd5626f7a6628dd82783a615157b25127e147f6f1b9125aa"
+            ],
+            "reranked_chunk_ids": [
+                "b8cb9c47ca06cb7b6c5a9d0073587f7f70dcbf675ceca43c40d9e44accc7a276",
+                "d983b45471d15102de75020f6df55041ca172f229997629ce04b991903fcc15a",
+                "c42a9d98578f952ba3b77c2d7e20f4c01dd0e4ad279b275336d675215ff3e702",
+                "a3671432657cd721c7c9493c772f05d8e961238e9fc5e7d53c171727ef7d313e",
+                "425567735c471cb3e9972814b0875c6fe2152e86624bd43700eb8cbc8a1e4635"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.7279,
+            "reranking_latency_seconds": 2.1994
+        },
+        {
+            "id": "RAG-004",
+            "question": "In the R2samples() macro, what do the parameters S1, N1, S2, and N2 represent?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "946ab20f450190d6ca2acae2928ff5672db870d0294d455b2ab88f747b38a19f",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "946ab20f450190d6ca2acae2928ff5672db870d0294d455b2ab88f747b38a19f",
+                "8d29aeb634fa5eb5e3aeafac9d3deca82bb3ea33f527a85428ac90132e2ee8b2",
+                "e4c7cb0f5f29a25f72958f740c4eba1ee999dfe1a873fe2b50e5fbb6dfa81ce7",
+                "a8ae456c13dc0bdae61310afea2697737ff83a9e977681817dc525238bf870b8",
+                "bcbef29333f3cc4378781edddf905d7fc310c1a8be2aad56c661ccd8b1cf60f8",
+                "a7a47bf5c0ec64728e09b6ecff5442b351cf0308a51189e91795ada12590f282",
+                "7f348d2e6cc33564b6d7c1397cfa7e3b1f17d0a2394a5ad93870a939229f8365",
+                "38a4de25bf357f2aaddb7e66e8bb3eede635d010d472312b6c4bc3770e268c0b",
+                "1d36ac6edd04414f8d2fc379f0fe50b08b60ae337203b2540494786202a968ef",
+                "f21df3aa4db6baf1274165a9a839921a30aa9809020472dce3491e24693e0a3b",
+                "a3077b2e11c5232f2074b6756c3961d7328152af8b6bca85a8e283facd17bd76",
+                "d76c6bd4b3595e691a3c25794f05c56c2fa2c09cd1e73172a23fec681d68135f",
+                "350e753dbc841f111fb3088552729a99cafd7ea44153899ff651d35541327ff4",
+                "1047dd87f1323d70cfae355b4e3e096b4d98253fc6c8d895c76b9ff1e85c6bb6",
+                "c5cf7e11c39872aa3f924bf7e5405e40b96a9b8436265415df4e91380573919e",
+                "8b10e82006ec1a62775e38a724e70d43739f46e6041a85d120e614495e99e56e",
+                "e58f021fa6a42c9a5008030de22f4d779fdbad8566e413aedbf64b9d02621502",
+                "e60a69b39eaee015d6e30249a926528ae30e48c83b64dd5f582ec9ea8244709d",
+                "8d310a4551616c9e912f9f6e328699bfdafe5f5d422e79598af8e28005177b23",
+                "5e7ea335f46dc71087b9fb35fb6f43a1e3051bcc0ed0e8704363378f52218102"
+            ],
+            "reranked_chunk_ids": [
+                "e4c7cb0f5f29a25f72958f740c4eba1ee999dfe1a873fe2b50e5fbb6dfa81ce7",
+                "946ab20f450190d6ca2acae2928ff5672db870d0294d455b2ab88f747b38a19f",
+                "7f348d2e6cc33564b6d7c1397cfa7e3b1f17d0a2394a5ad93870a939229f8365",
+                "f21df3aa4db6baf1274165a9a839921a30aa9809020472dce3491e24693e0a3b",
+                "a8ae456c13dc0bdae61310afea2697737ff83a9e977681817dc525238bf870b8"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.5,
+                "ndcg_at_k": 0.6309297535714575,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 2,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 1.3518,
+            "reranking_latency_seconds": 5.1577
+        },
+        {
+            "id": "RAG-005",
+            "question": "In the CatCompare() macro, what do the status indicator values 0 and 1 represent?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "d46dbc0424a47afc03d81ad366c9525f3109b7107a34fa9c718a4f6a32d566cb",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "7a59f0f8ca958e4220232d8072bd84e96cf1072b65d91cc7fbc87a76282941b4",
+                "4564af737e50cd5e1ad7411343e7ae69aa8dab8a7891a463444ab4e3aa652784",
+                "d46dbc0424a47afc03d81ad366c9525f3109b7107a34fa9c718a4f6a32d566cb",
+                "d4bbda4cc6fd4bb8a73b9341f49ebc804e9751c0946e6057d121c90dd9718efc",
+                "c548e24bac50455fd5fc77176f639a4003dccf4567af3e6af3b9871fe5575992",
+                "9c7074b38b6425ac0bd1d28d289781c6f02533154595d4d851a9fbae73809ab6",
+                "2e2d444c5bb9997b2085395b012eaf5a1f1d338663684a3f2e3111d5004c4ced",
+                "fc841d3d67a50c8e192c97c4750c7a2d848e761d5633822aaec8b0ee4948d6f9",
+                "927615fee8f31ca3cc58c5c1727313067c0c17e3afe2b261a4c96f3bccfb4045",
+                "5fdc7afcfa6e8e03a5653289ee53527e7bb479cfb57ba1698d7422ab0ed598ec",
+                "32563a750aebf31c1e97d30243535395ca48c0c78d3ee147bc150d0520f2a7a4",
+                "8b44dc98dd6b30fc02c6c5cd06cddcbcc9fed504c1a15f4466b1e981b2f3ad8f",
+                "0b50d24a853aaf63d9bd5cda141dfb34c2e22e502754d78132cc4d82f75ba278",
+                "85d6881549b1854f65ccee895dcef02f425b0d67eb787fa7e179ca143ecf0dac",
+                "e7d3f0414ef479ce17fba759623337ac93cd6367a3f973ccecd06966dd8c3242",
+                "b69d58ee0c813e9aacdb9e0cce48be212d975d8280915787d43f68075eaa1f81",
+                "5317de9f3c184032d4a4374df148b16499fe7cf4ead0bb46b9fd9f36191d2a4d",
+                "2f67333e33b14ff0325dc66f127f3f6ef97a3968fa0ffb524e9f8416a949846f",
+                "e60a69b39eaee015d6e30249a926528ae30e48c83b64dd5f582ec9ea8244709d",
+                "194ea089c364087bf1f14e9291175573752002919692359c708c7df056bba390"
+            ],
+            "reranked_chunk_ids": [
+                "d46dbc0424a47afc03d81ad366c9525f3109b7107a34fa9c718a4f6a32d566cb",
+                "7a59f0f8ca958e4220232d8072bd84e96cf1072b65d91cc7fbc87a76282941b4",
+                "e60a69b39eaee015d6e30249a926528ae30e48c83b64dd5f582ec9ea8244709d",
+                "d4bbda4cc6fd4bb8a73b9341f49ebc804e9751c0946e6057d121c90dd9718efc",
+                "0b50d24a853aaf63d9bd5cda141dfb34c2e22e502754d78132cc4d82f75ba278"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.3333333333333333,
+                "ndcg_at_k": 0.5,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 3,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 1.3226,
+            "reranking_latency_seconds": 4.9352
+        },
+        {
+            "id": "RAG-006",
+            "question": "In the association-measure calculation macro, which SAS procedure identifies the unique categories of XVar, and where are those categories stored?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "22fad2671963149b285417ee78e8fd2d61f7eca922fc55f46a3a19d65885e07e",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "22fad2671963149b285417ee78e8fd2d61f7eca922fc55f46a3a19d65885e07e",
+                "8af7e659e57da041aef71129001869c1df51868f7ef6d461707ccef79cdf8219",
+                "308776797a95cb45e36c79033aabd74466fb242c5860db94eade0c48b0500e99",
+                "d066ca0202d986906f9b6404447f81b270fbcb363b73b9fdb81086406ab12631",
+                "7ced41effa76a53ec5f7ef70f99803e7bf6f152f985e429503123d0ff6edeb5f",
+                "2e6bfd586323b152d5fd633867be7125187dfec61abb43011c81950de7c32656",
+                "7fb7804f04b34b51806ff351638cf3f60bbbd1006d56882969ab97f226ded802",
+                "72915ab795ad9170040ba15dea5c7467aaf47c60df51b0a57f8091a972146f05",
+                "de58456d6037dcb59787e3b94cacf8cea999d325d4229a0bca7779eaec842369",
+                "1775d686dad5e9f04a717692d502bb9d3b1d32834b67a5c41d7f427eb1f840a9",
+                "d7352c0d7788c59267d53e0e2dacfa1bf3402a3f633df308a77fd682f233df2e",
+                "70b00da9593f87cce0980a8df0df97c294b98c6207702fa59e8571df845d7771",
+                "433eafc214ce3be229ab1302c59701bdf4a318213818eafed924d9f393649ca7",
+                "8174c4030dc97a6c0226b68044ee2628447ee5b46c029b8ba9974c78be61d7ac",
+                "781c54802640bccbf12fb2d054f525434a001a211d0971dada0738583dd041fe",
+                "28366eeb4bf704edbedc0e6e43d8151f24761f9b31f4c3add6714b7e300ddd86",
+                "62870833bf3aebb79883fa3f2bc3ec2ca39453b7406cdf8d117090680a021002",
+                "5ccb165fe2a1ab9b894fa6759b2bf40356112d1770bdf1bcee73d80d757d20c6",
+                "9b6107f891a7a92b19c8f14f48b4245a0d70f5c60bc4325867fd1bfc66953687",
+                "40f51b6e13dd8d462a479368bd45a748bd28e6e33221c7b7bfb9019b26282ad0"
+            ],
+            "reranked_chunk_ids": [
+                "22fad2671963149b285417ee78e8fd2d61f7eca922fc55f46a3a19d65885e07e",
+                "de58456d6037dcb59787e3b94cacf8cea999d325d4229a0bca7779eaec842369",
+                "62870833bf3aebb79883fa3f2bc3ec2ca39453b7406cdf8d117090680a021002",
+                "5ccb165fe2a1ab9b894fa6759b2bf40356112d1770bdf1bcee73d80d757d20c6",
+                "72915ab795ad9170040ba15dea5c7467aaf47c60df51b0a57f8091a972146f05"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 2.7116,
+            "reranking_latency_seconds": 6.202
+        },
+        {
+            "id": "RAG-007",
+            "question": "Why is Spearman correlation used instead of Pearson correlation in the described variable-screening approach?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "4a7ad549c8669cd1eb7c55ec9e35799c5800867bc0f56f4b3111377ce7859e1f",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "4a7ad549c8669cd1eb7c55ec9e35799c5800867bc0f56f4b3111377ce7859e1f",
+                "8106161057b6834e6b358b6506eaf3dc6d9598941c09085966cf92fae53801a8",
+                "1407ce5b304575757a48832f13bd168930afe20e7e3358b46576641211c57e72",
+                "d3a04bd10cdf4f8f75b3186f23dfad06b1526a72395f3063cd9c1c5f971d82a4",
+                "11cf932c63106f34d2846c741d241ecec217e2d451786f0a69da01fe3ed9b0b1",
+                "9326bf8ff1c68e371617b4aaa4851cc4e46dd669fd22a8e32c4ab7cc28f5405f",
+                "bfb205bc7943d73dd3e41dc5f809f35366039eb1f39906609a5003ec4a4aa832",
+                "ec1b07103f25f78c6222b40fff64242d42b7e2e9492835257cadc3d876624cb5",
+                "39fb0fec013b240da0dc591af3b5aa4669fff45006512ea7f9ff3827d6ac25fb",
+                "e65d7623fb309a65b3d10bd901acc051a16b7f45ca59bfc6d362acb2fca07c18",
+                "5156d837733aeccc707e5d43c813960bd855e89f9ad604d1550123bc83051037",
+                "2b3bbdc379bdf26149e421d03df0ed2a083546c3a2b824987d2336ae77085b17",
+                "99c428e61f36a6cffabc53dd1bdc1533f6c8329a44ceeffa0050e0fa755143c3",
+                "35ed78958d94f99411d03d4776def379882c58e2391f87034fafea8fe6f4be70",
+                "08623ae70c271caea805aa3295716b5297a3dbb761808476f370605a5c72a8fd",
+                "dc7d50420a78c5dd5ed6aabb8294e3c51546040f8c7f8dce49e97a62e49d37ae",
+                "d74275705af3e027e6a9fae288c36b57fc5d8499e7f05cd79105be5cc5028d4c",
+                "cf2621bf388c4656a6a0c6e5f55c13be339dbe37efe64549346074c7f4774c58",
+                "69a48e556d234eb1ac995e284327bf26149f3f16038011b150ccaa5b7e67dc3d",
+                "fa97968c5754aef77e64f487952cdddea105290c83606f7fd7e334bb815d7797"
+            ],
+            "reranked_chunk_ids": [
+                "4a7ad549c8669cd1eb7c55ec9e35799c5800867bc0f56f4b3111377ce7859e1f",
+                "8106161057b6834e6b358b6506eaf3dc6d9598941c09085966cf92fae53801a8",
+                "d3a04bd10cdf4f8f75b3186f23dfad06b1526a72395f3063cd9c1c5f971d82a4",
+                "1407ce5b304575757a48832f13bd168930afe20e7e3358b46576641211c57e72",
+                "11cf932c63106f34d2846c741d241ecec217e2d451786f0a69da01fe3ed9b0b1"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 1.9764,
+            "reranking_latency_seconds": 3.4511
+        },
+        {
+            "id": "RAG-008",
+            "question": "What is a limitation of Spearman correlation when assessing associations between variables?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "4a7ad549c8669cd1eb7c55ec9e35799c5800867bc0f56f4b3111377ce7859e1f",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "11cf932c63106f34d2846c741d241ecec217e2d451786f0a69da01fe3ed9b0b1",
+                "1407ce5b304575757a48832f13bd168930afe20e7e3358b46576641211c57e72",
+                "4a7ad549c8669cd1eb7c55ec9e35799c5800867bc0f56f4b3111377ce7859e1f",
+                "8106161057b6834e6b358b6506eaf3dc6d9598941c09085966cf92fae53801a8",
+                "e70fed83580f5967e467f3e4346df4253adca30f651be33169c93fca9e5fa387",
+                "7947d6e9d5a8016a86ae12584c40d84dae64b1aebeca3beded8683f2b07b8c93",
+                "bfb205bc7943d73dd3e41dc5f809f35366039eb1f39906609a5003ec4a4aa832",
+                "f42325f3ff1f16c05cf715e138559c66a6d95b9fb7c303f6c29048dff5cb0bc6",
+                "6661e17d7db15ed107154cb7678cb337e79604382e3b2ac0ef89772366daa33a",
+                "dc7d50420a78c5dd5ed6aabb8294e3c51546040f8c7f8dce49e97a62e49d37ae",
+                "2b3bbdc379bdf26149e421d03df0ed2a083546c3a2b824987d2336ae77085b17",
+                "d3a04bd10cdf4f8f75b3186f23dfad06b1526a72395f3063cd9c1c5f971d82a4",
+                "3c47f6409dfb96cac87903eb81d8cfa64c7d7fbc34ca8e77dfd4879c47fb816a",
+                "5d4c9d8177dbf7b1b1e4de01a5d5449c8242e43b9612f2716e1b3c68b78d53aa",
+                "965c3f2b86f6a0b87f90c9c2209e614ff394b3bb79c188ad7767d17178164c75",
+                "69a48e556d234eb1ac995e284327bf26149f3f16038011b150ccaa5b7e67dc3d",
+                "99c428e61f36a6cffabc53dd1bdc1533f6c8329a44ceeffa0050e0fa755143c3",
+                "7e98a3cad034ac9b16b30b60931eb2cb99f9e576763e9f803eb0c8bb628cfafa",
+                "0eb8f65b5c64d9058414e30cf57ef198e8fbac9e0c37fa23adc2ca749d2b5469",
+                "1cb5a628550ba19517552913d5c6c83a8855a1341911ea6e62cfe0f20d432452"
+            ],
+            "reranked_chunk_ids": [
+                "11cf932c63106f34d2846c741d241ecec217e2d451786f0a69da01fe3ed9b0b1",
+                "4a7ad549c8669cd1eb7c55ec9e35799c5800867bc0f56f4b3111377ce7859e1f",
+                "dc7d50420a78c5dd5ed6aabb8294e3c51546040f8c7f8dce49e97a62e49d37ae",
+                "1407ce5b304575757a48832f13bd168930afe20e7e3358b46576641211c57e72",
+                "f42325f3ff1f16c05cf715e138559c66a6d95b9fb7c303f6c29048dff5cb0bc6"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.3333333333333333,
+                "ndcg_at_k": 0.5,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 3,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.5,
+                "ndcg_at_k": 0.6309297535714575,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 2,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 1.0995,
+            "reranking_latency_seconds": 3.1281
+        },
+        {
+            "id": "RAG-009",
+            "question": "Which association measure can detect a wider variety of relationships, and what is its stated range?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "11cf932c63106f34d2846c741d241ecec217e2d451786f0a69da01fe3ed9b0b1",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "11cf932c63106f34d2846c741d241ecec217e2d451786f0a69da01fe3ed9b0b1",
+                "b3b4934c46eb5ebc27af3a468bb8d3ec2f70f1602bed2db9e4feb10d2222057e",
+                "2b3bbdc379bdf26149e421d03df0ed2a083546c3a2b824987d2336ae77085b17",
+                "1407ce5b304575757a48832f13bd168930afe20e7e3358b46576641211c57e72",
+                "b39aabba623dc7576e7992bdda4188e2d3ef58339704d597038525895616e8a4",
+                "1cb5a628550ba19517552913d5c6c83a8855a1341911ea6e62cfe0f20d432452",
+                "dc7d50420a78c5dd5ed6aabb8294e3c51546040f8c7f8dce49e97a62e49d37ae",
+                "3c47f6409dfb96cac87903eb81d8cfa64c7d7fbc34ca8e77dfd4879c47fb816a",
+                "44031a918e5ed5e20696a7b80cc90789d639268aa6fa892918f8394b6d60e9a2",
+                "2796aed43656edcfd24c4cf08fafb62c3b9bb783bf9d34abda6bbb77a8833311",
+                "d94c56af6c0e86943e3b3bb63cff4d0b179f5371c9f6f714bc1ee1edd99d2589",
+                "ab92ff281a00775e8bdba5a320974498c86a960ea913fbc758cd29352f641edc",
+                "0eb8f65b5c64d9058414e30cf57ef198e8fbac9e0c37fa23adc2ca749d2b5469",
+                "4bd01c51de1825fdb7f5f128409278a34b5137c730cc8e5becaa4988e9cbfa82",
+                "052ced9db2a3a8f3c3dac0f4ac5406c4939c835cb1f70a0bdee7efb2af98958e",
+                "aaa55469052434fa8440976747edd4a8db19d6fffd0003b6451840df39e2f0e9",
+                "2be36dff16430fea8427c37c8a27cfaed655a8ec719aa32fc582c30806124b41",
+                "70b00da9593f87cce0980a8df0df97c294b98c6207702fa59e8571df845d7771",
+                "c974c696b9cf04964a431ad1a4a16ab1cf7164963f94c05dfc4502ff523e7dce",
+                "35ed78958d94f99411d03d4776def379882c58e2391f87034fafea8fe6f4be70"
+            ],
+            "reranked_chunk_ids": [
+                "11cf932c63106f34d2846c741d241ecec217e2d451786f0a69da01fe3ed9b0b1",
+                "dc7d50420a78c5dd5ed6aabb8294e3c51546040f8c7f8dce49e97a62e49d37ae",
+                "b39aabba623dc7576e7992bdda4188e2d3ef58339704d597038525895616e8a4",
+                "aaa55469052434fa8440976747edd4a8db19d6fffd0003b6451840df39e2f0e9",
+                "b3b4934c46eb5ebc27af3a468bb8d3ec2f70f1602bed2db9e4feb10d2222057e"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.4881,
+            "reranking_latency_seconds": 2.7918
+        },
+        {
+            "id": "RAG-010",
+            "question": "Why is a left join used when creating the Kids Outreach report from CurrentMemberKids and ProfessionalVisits?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "f3afd871930c712c7def0a9c26e65bef4e1f72dd47eafa318be97332464b0f8b",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "0e7a09a69feed121869d5c11c9e9ede683a68fbf120dff685f16ac21cee16d48",
+                "f3afd871930c712c7def0a9c26e65bef4e1f72dd47eafa318be97332464b0f8b",
+                "afe9834be54cd064a862cbefab51f666a48c5978f604714d1362c7c3df635683",
+                "0b7229ab64e73a23da2a65db289b6d47439ee5509ead5b1e4934af0c48282124",
+                "d2e66d480109e68d19950a48ec52c5d5af517082bf1688e9165bab996d99419e",
+                "684265b13bc54f281475211754a1488c7606e86ca197513b962bd6ff442ce720",
+                "4b78040efc7535811e119024a0bb2a694e0e1d2a4529cc78ab3f767a6d8a99b6",
+                "46bc724f4fe39ed2ba44c84dedb8cbe3dc11617b0f6ada801c341fee7b192e1a",
+                "9fffbd33776b9aba98403f6fa1777a3987a2541cb1c271bd78be4996a8db5312",
+                "5072d417f2bb1ee0344432ec68db48cfd29541295b8f00ffc4ecdbdd9223ac33",
+                "c4bfd65e45be49bdbd86774f9a0595b6e57c237558b10dae00b9d124dca6faf8",
+                "e80bd63145e9c561ed041937f4dbd6f30410f116bcefb89d4994b9f4074ea6cf",
+                "21bf31fd6058dd542ce39ce09a6768d6d3f940df35f4424bb0e345dd0f844928",
+                "cd86c6ac584ed8165322c6fc2ddf5a2059257e18f0d499e09d8e259280500a3b",
+                "faf237267847e6de2ffad75c6584ac04fff806a1dfba2eba3378c78be5fc2374",
+                "c3b51cfdf3ddb92dba58deb87d4eeb73086ad3a2b6d36f41845c2097f5e46a10",
+                "0f1b5aba303e70b81ab4e77166b1ad0ccf34fd04892bb22f9d70d86567f08538",
+                "7a8f46ba5d211d850ae879c0271e8135e23cf75762ae0a6012d2544db0c78117",
+                "bbfdb155fb9e89bfdf082f31eaa776913b6afcdb6c164b76ce49863c7bbf5ced",
+                "607491a5da9af3fc1781daa6e70e8afd1aaf124e7afe77dc732c100f7e4ed6c9"
+            ],
+            "reranked_chunk_ids": [
+                "0e7a09a69feed121869d5c11c9e9ede683a68fbf120dff685f16ac21cee16d48",
+                "0b7229ab64e73a23da2a65db289b6d47439ee5509ead5b1e4934af0c48282124",
+                "d2e66d480109e68d19950a48ec52c5d5af517082bf1688e9165bab996d99419e",
+                "f3afd871930c712c7def0a9c26e65bef4e1f72dd47eafa318be97332464b0f8b",
+                "afe9834be54cd064a862cbefab51f666a48c5978f604714d1362c7c3df635683"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.5,
+                "ndcg_at_k": 0.6309297535714575,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 2,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.25,
+                "ndcg_at_k": 0.43067655807339306,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 4,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.9203,
+            "reranking_latency_seconds": 4.4007
+        },
+        {
+            "id": "RAG-011",
+            "question": "What role does the eligible population play in calculating a HEDIS measure's rate?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "bc72c102289d7c7416a6e22f17c8f4018fceab856f39a39712a47b1723e3c1d4",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "bc72c102289d7c7416a6e22f17c8f4018fceab856f39a39712a47b1723e3c1d4",
+                "6afd2566d4df1d6e12441c16beeebf89f0b6a46bc7f0419d3270c1269ec35ad4",
+                "4347bf4c8ba8c917533cae62bfda52b7b242656b8b508b3f8ac39d07aa392c08",
+                "b496fe57f328209fc295b477d0af1a9fdda77d995b5bcf8776b5e38065a01c8f",
+                "9eddbca79900a21b60fd809a8abc984aded240dc5af342270a9217f4443c803a",
+                "42e0bf6fefedd0c20a83e710c250ed6388a143efa3a3ae43d5450120b1568edb",
+                "c7f1eed6372bae00ce1dd5736b631c697fc9571b8749fbc4f4d292a284c00d80",
+                "fb0c14f5474cd51ebed6aa48d1e659747fc694fbf2e104df3e7da5fb971cf0d9",
+                "81376e6103cf8b403ec5884210dba34d548ef0514c46bf2953c825a7e77f5266",
+                "33d3a890d7b9b252438a8e5100a9ad460fb0e61934937a30cfc3f21b59192db6",
+                "db6df6ddbe04b8bfc02c1f7f6a1a91626b99865473a89b1727a8bfdbd5c80d06",
+                "44b633fe971876ab6859fe18e53a4dade2f6025035e2d40186950312e3c75c8d",
+                "bf65812cc0fe2538251638aa3a92ec173cfe335578b087d08f1fe8164f4a5e34",
+                "e99175ff82febbfac4cf2483800e53868072ac30a0c5a97985156030e82842e1",
+                "f22600097179995c2fde18389a392fdc66918d727a148e756749d817487705cb",
+                "83ab7993f0721f8b92ffc7a376c8f5421c50637984547687f89a1929d9078e8e",
+                "801b8e8c8ef884b1659e37c85835911962a771115b9feed7e4a55dfdab7a6fdc",
+                "340249c25d2cb00afd918f3f1fcae6d90d5625ed6b656fb87f1e29baf4cd1ad3",
+                "1b79c253410deef3b34b4564e97290255b10338d5a16277ca7c1efd4236b8efe",
+                "b6e5447088e8dc2f3685b7f3fc9b4fee4aaaf86d00735fc518be00c958ba84f5"
+            ],
+            "reranked_chunk_ids": [
+                "6afd2566d4df1d6e12441c16beeebf89f0b6a46bc7f0419d3270c1269ec35ad4",
+                "bc72c102289d7c7416a6e22f17c8f4018fceab856f39a39712a47b1723e3c1d4",
+                "fb0c14f5474cd51ebed6aa48d1e659747fc694fbf2e104df3e7da5fb971cf0d9",
+                "bf65812cc0fe2538251638aa3a92ec173cfe335578b087d08f1fe8164f4a5e34",
+                "c7f1eed6372bae00ce1dd5736b631c697fc9571b8749fbc4f4d292a284c00d80"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.5,
+                "ndcg_at_k": 0.6309297535714575,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 2,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 3.2053,
+            "reranking_latency_seconds": 8.7537
+        },
+        {
+            "id": "RAG-012",
+            "question": "How is the numerator established in a HEDIS measure?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "4347bf4c8ba8c917533cae62bfda52b7b242656b8b508b3f8ac39d07aa392c08",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "4347bf4c8ba8c917533cae62bfda52b7b242656b8b508b3f8ac39d07aa392c08",
+                "bf65812cc0fe2538251638aa3a92ec173cfe335578b087d08f1fe8164f4a5e34",
+                "bc72c102289d7c7416a6e22f17c8f4018fceab856f39a39712a47b1723e3c1d4",
+                "6afd2566d4df1d6e12441c16beeebf89f0b6a46bc7f0419d3270c1269ec35ad4",
+                "0fea293bf4ffd79ec8abffba43967f9941f289656b543cf907a4f90dc7b6d34c",
+                "f22600097179995c2fde18389a392fdc66918d727a148e756749d817487705cb",
+                "b6e5447088e8dc2f3685b7f3fc9b4fee4aaaf86d00735fc518be00c958ba84f5",
+                "db6df6ddbe04b8bfc02c1f7f6a1a91626b99865473a89b1727a8bfdbd5c80d06",
+                "2ef762f4e1c932e2bedd9237f25490b16ec6dfac7f9e0a1951711ffad2356e61",
+                "1b4a963cbed092b3860e67769f83a0fd018b9d2394437f838bdf012857b41be5",
+                "70b00da9593f87cce0980a8df0df97c294b98c6207702fa59e8571df845d7771",
+                "fb0c14f5474cd51ebed6aa48d1e659747fc694fbf2e104df3e7da5fb971cf0d9",
+                "8afb6ed69fc80e59f33489421f298207db659b660ff15e79dc3681d09e092125",
+                "c7f1eed6372bae00ce1dd5736b631c697fc9571b8749fbc4f4d292a284c00d80",
+                "81376e6103cf8b403ec5884210dba34d548ef0514c46bf2953c825a7e77f5266",
+                "37c03fbcc513c1b339c3b75763e88a7f4f504ddc5e282992cfea5671a31f73b3",
+                "44b633fe971876ab6859fe18e53a4dade2f6025035e2d40186950312e3c75c8d",
+                "42e0bf6fefedd0c20a83e710c250ed6388a143efa3a3ae43d5450120b1568edb",
+                "c29ae922318bf259d68cdbd5ba4de80e0ce183bcae0ae71586e26c531e248e4c",
+                "83ab7993f0721f8b92ffc7a376c8f5421c50637984547687f89a1929d9078e8e"
+            ],
+            "reranked_chunk_ids": [
+                "4347bf4c8ba8c917533cae62bfda52b7b242656b8b508b3f8ac39d07aa392c08",
+                "bf65812cc0fe2538251638aa3a92ec173cfe335578b087d08f1fe8164f4a5e34",
+                "0fea293bf4ffd79ec8abffba43967f9941f289656b543cf907a4f90dc7b6d34c",
+                "42e0bf6fefedd0c20a83e710c250ed6388a143efa3a3ae43d5450120b1568edb",
+                "6afd2566d4df1d6e12441c16beeebf89f0b6a46bc7f0419d3270c1269ec35ad4"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 5.0836,
+            "reranking_latency_seconds": 7.379
+        },
+        {
+            "id": "RAG-013",
+            "question": "What is the difference between general and referential integrity constraints in SAS?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "d63db2f92e72310edb87e96ffb669bf7570c3392af6f026bca6d0d7451985d09",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "d63db2f92e72310edb87e96ffb669bf7570c3392af6f026bca6d0d7451985d09",
+                "0f83159f0dd93ed9e5bc3ac1b7855861424f9408ea35cb3d19d8b049bc72b452",
+                "e0bdb9c65d160e45351339db2c224cdad4acb67a9044723d50e3b1e6a05be6d4",
+                "b1b1a8c83bc942b17f070de08ae9586085e003c08932b0fe7188c112b25bad05",
+                "ac1ee1c40eb08928a33cec38fb2ef0f4cc5f76496828c3e9cb70dc970e97c0ec",
+                "53463319f1b6318df6e766553590132a237489326547ff232614323d181b1549",
+                "e3b9ed18f19034b51798ed4f8aece1ef3b18e4e099ab8bc6e860ffc08fd39cf6",
+                "364d3e6ce2e142df95e455522b964878f2876da2f5a19b80a5d3de5a27f7107c",
+                "e33844e8a85c18c4909afb24a51d84aa0d32ea728c28208549b0f6431698ff5e",
+                "647418f4b0afe24e8f94a76ea4ee96db2f1cf259e84dcf2fc149a6d313529856",
+                "9e927ad602ea0e8008ee275fc562b125e529638cf02f3de3281f7a9d478792aa",
+                "10a3451a126847287b3a75ae95d63c8b3e260fe0655486257fc14fb22f959b8c",
+                "4b1f0c74c645da19452be48886816ef7482430c8dad069c6c9f3cd3993d634b0",
+                "dad363118807ee99ead177a5359e5301a0f36cc6f81ee45a05074c25888b1720",
+                "9952e18ca1e2ea0f34189004a4b56354a3bf848ecd76de5c0c45050593194ac1",
+                "ffe35621134be13e99259eb6ef6e9b4e2a6f6fe654cea79acfc58c5bd8d28f3c",
+                "4e109502154e7ecf48a8fea25329e55d629fafd94cfba756d260b11953484216",
+                "660b3884a76a8d47d0d7a68756ca825ca240e16217eae745394d502d1b56e348",
+                "72e1e817ce619bd749a4634f6b228c2b5d0bc8a7f693df804fa63afc839677a9",
+                "f0d70cbda54fe1f6ece5078c3176c203a01ddd8ddbd3f5c70889042089c36732"
+            ],
+            "reranked_chunk_ids": [
+                "d63db2f92e72310edb87e96ffb669bf7570c3392af6f026bca6d0d7451985d09",
+                "0f83159f0dd93ed9e5bc3ac1b7855861424f9408ea35cb3d19d8b049bc72b452",
+                "e0bdb9c65d160e45351339db2c224cdad4acb67a9044723d50e3b1e6a05be6d4",
+                "b1b1a8c83bc942b17f070de08ae9586085e003c08932b0fe7188c112b25bad05",
+                "660b3884a76a8d47d0d7a68756ca825ca240e16217eae745394d502d1b56e348"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.9975,
+            "reranking_latency_seconds": 2.2604
+        },
+        {
+            "id": "RAG-014",
+            "question": "What is the difference between the SAS %SCAN and %QSCAN functions?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "746d01dabadad970c95c3954480956dff34abc295a479a531b48193e3488bec6",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "746d01dabadad970c95c3954480956dff34abc295a479a531b48193e3488bec6",
+                "a9188108528f360c3f1dbb48a23cdbb617eb7ab02b06df40a5215371b3fa5019",
+                "4235484054f5ebcaf5f6d905d2f1080805826b7d5878dac1f25f7c820bcd7c13",
+                "e10e385f339cbdc6d78046aab0906f989c88f1e53a330aa50cddf369be3ae3e7",
+                "cc1c8b1bec2d02c57ad02574758ade48464d447029d20bcb5ac3f4d5dcb54fad",
+                "2a961b7c26f0f624127b4ec4847e8728c90624cde7d8805d1de5d4670867ccfb",
+                "85e2bc021539abf8b3e921c076b7a3525dc183fe1346aa6860986428b05c4679",
+                "739618217bf0ed7f2dc9ad59cbc66d44f2c895d41f6e1d65d9698edfde3a06f6",
+                "94158f7fe9dee0598ee1c63878000b65f2804a488d7df94d8237aad8182b10eb",
+                "d39348f44fd08e0211accd2b121911438e5698653970ddf835028ee39e7dd719",
+                "f9520897c5eaa9347717ca2731598d323669e101cad7b9efba1fcc66b7dc2723",
+                "ea4ae6af5fbccf18030a4b8481fe27bc6fc00c05c8ec23c2fa107dd9f5d30ed7",
+                "b83338386e45743a527e70b680b0891a64915f8293882acfce3b40192928ccee",
+                "5e27440b68837ee9755c520c081d0eaf0f8ba14334bbaca92efcb962b92f3b1a",
+                "f5201d88fa535ce2e27bbb8d4dcf9d9d346af1e3c8875269b89613bb41b85a56",
+                "794471b5b435226fb43b6f2ec24d1bd771fb25344f2f053b734e49d658f9a98e",
+                "95877f887f62247890fcee030fe2d35486d1a8c30546223d1daa365922ff10a6",
+                "ffcced56a53fa244861c7e75308489b81654227afd77faf841e260ff5b9cf573",
+                "e08c20c649090098bf3565a255c11925f81e2e555627c06249cbfd185f153509",
+                "c29f33ee88e6708fc1bc001c06bb0aa6e077087e368e57bd12f6b3cd8e42c081"
+            ],
+            "reranked_chunk_ids": [
+                "746d01dabadad970c95c3954480956dff34abc295a479a531b48193e3488bec6",
+                "4235484054f5ebcaf5f6d905d2f1080805826b7d5878dac1f25f7c820bcd7c13",
+                "a9188108528f360c3f1dbb48a23cdbb617eb7ab02b06df40a5215371b3fa5019",
+                "85e2bc021539abf8b3e921c076b7a3525dc183fe1346aa6860986428b05c4679",
+                "739618217bf0ed7f2dc9ad59cbc66d44f2c895d41f6e1d65d9698edfde3a06f6"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.507,
+            "reranking_latency_seconds": 3.8342
+        },
+        {
+            "id": "RAG-015",
+            "question": "What happens when the SAS macro processor places noncompiled SAS statements on the input stack?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "589459f3af52e856ac878c157eee228b59dfb84eb672df7e08959d66a66fe008",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "589459f3af52e856ac878c157eee228b59dfb84eb672df7e08959d66a66fe008",
+                "012d1b1f9318b45153489f0aeb7c337e728caa75885e2c7865f154c4a478f029",
+                "b1fd302e283824cbcd8d667a42ea92e4199c8a06b85521f094e5e80ded79b947",
+                "b47756f3a1fbebdeca2a798c97b88c7f7852be54de1d379ebe9b750a65cdd5c8",
+                "8f50d8cd9f450d412f2d45344184c9cb9334ed0012cda0306c5ce93020652105",
+                "c4f4e25cae3d7d4c496966a54ae27e09c5a3d01e711302727e83d64f46e920e3",
+                "77da88307eaa682328996c065d8a8bde18d44d6cea272d9cb11b5a50e1a8e2c1",
+                "8acd86b3c22dc3c30d0e797416e238bd81685fba8cbfc8ec5866fe4bb3457918",
+                "f379b2a069d63558df918687f88e5784486e3feb2828f82975c58a967a5f84bc",
+                "637e4dbd2cc32cc7320503526da49540c796cea526536cda44351be18f20a2f5",
+                "5dfa0a06ad06f3506f1afbdc93e8ad6f3c2b79959290d900daeea50f51822f73",
+                "7ad5718a0134555fc64df95061f0064b8451acc1a2974fa0b43bbfdd258df0bf",
+                "8ad8354a6feb758408181057201c81f6a73d845a9856f9f84f29d77cc720c3bc",
+                "7aec9cebe6c1e40879eaaf8cf08ae6be68aa444729a2ef7a83cd3d050ed9d44e",
+                "77559123d6766468480ade1a62af25e5d0df76ffbb8e6b653b37436a879f42cf",
+                "b88ab1ef95b104eff43387ff711e0890cb40fd3cd2512f2f25fd8c0a404ebf91",
+                "35bf3febe9c275d03cdfa61a41f9f06ac70980837a7243cf89ba931088586f30",
+                "ae3171706507b3101c83a7f4b31fe4cc368d44a3d5abbb10824e333c8b46506a",
+                "2f0912a2aa8da0d5b1b58a1941880bbc10f592402afeca85dc1f3646416311f4",
+                "d087438d6bdfe9845486c64790cb2326052f355cb90967f80a2e4fa84373e50c"
+            ],
+            "reranked_chunk_ids": [
+                "589459f3af52e856ac878c157eee228b59dfb84eb672df7e08959d66a66fe008",
+                "b1fd302e283824cbcd8d667a42ea92e4199c8a06b85521f094e5e80ded79b947",
+                "b47756f3a1fbebdeca2a798c97b88c7f7852be54de1d379ebe9b750a65cdd5c8",
+                "8f50d8cd9f450d412f2d45344184c9cb9334ed0012cda0306c5ce93020652105",
+                "012d1b1f9318b45153489f0aeb7c337e728caa75885e2c7865f154c4a478f029"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.7851,
+            "reranking_latency_seconds": 2.816
+        },
+        {
+            "id": "RAG-016",
+            "question": "How is the appropriate type of logistic regression selected based on the response variable's number of categories and type?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "f78dcfb98bb7e687bc140ccc3c5dbd249d0d19c703cdb71d57d7225da80735b5",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "f78dcfb98bb7e687bc140ccc3c5dbd249d0d19c703cdb71d57d7225da80735b5",
+                "7efcdef0712db4f6a8afe878946edd97561008ce2e95a31f9fcedb31dfe6ee68",
+                "abcd8922fd59419c4197df00e724412132478094ad3c3150a8e787eec084a498",
+                "416168ccf2a2953e872d137600059591364a016eaa1a4cc1d31b5b1ce29d5745",
+                "9b396fd310f07680b4302a2e07d11fe0e20d61b510f41fded002077e0680c589",
+                "501935dde9c12efdedbc6d60446790c6362472aba25f043c1b637085aa77f358",
+                "9272347cc95d3fe22996e8ab5e06c077a7240eb294d88a7f245535f3ae9b6528",
+                "02d5aa26676fc2ea687c7d3f40bd4addecccb2d064805d084fc3bcb1d380091d",
+                "6fc451d01c9282f0aafacebcc62a750ffbd9f8d9be72bac7010b72f17c2f6d5d",
+                "dc7d50420a78c5dd5ed6aabb8294e3c51546040f8c7f8dce49e97a62e49d37ae",
+                "14bd9a7ead788a9bdc34c1c5eeca58f605d8934f5b053b0095392453af140922",
+                "8e80ce8340daee4d66906ea663056ee3ad5e53ef1e5f5a6b06f8a24bebf884ae",
+                "9ea2c8dd71c7b3dcf864a67c613307550bc45159add5d54845bd367265117b36",
+                "f2e949a6c281577c52e8f69c82662d386d4a3e7e076cffea76269b30facdaceb",
+                "07661c58fe7270bd8f05ae5f794769a533f50bfd051bff8fdc2b9707afd0b8de",
+                "1501964b5dd39d55d82d4b2475ac6970121297b96268ba39b807e4840e2e491f",
+                "e3c1aa201f45973b1307b60d6130ad5eac2f198a637ea91cd5555f26d0cd37ff",
+                "c850117eb8d300fc53991563baa4ac277cc52df08b5f310171373f7a6ea8a74d",
+                "c8896f0b99e88064e68e126aa2cf483de8efbe26219eee534e69003afd8ed174",
+                "98dcda1a56b5064d8d3c9e30aa0d4dc57c69d2ec1b04a0fff2ee8430d3d222c1"
+            ],
+            "reranked_chunk_ids": [
+                "f78dcfb98bb7e687bc140ccc3c5dbd249d0d19c703cdb71d57d7225da80735b5",
+                "1501964b5dd39d55d82d4b2475ac6970121297b96268ba39b807e4840e2e491f",
+                "9b396fd310f07680b4302a2e07d11fe0e20d61b510f41fded002077e0680c589",
+                "02d5aa26676fc2ea687c7d3f40bd4addecccb2d064805d084fc3bcb1d380091d",
+                "7efcdef0712db4f6a8afe878946edd97561008ce2e95a31f9fcedb31dfe6ee68"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.4858,
+            "reranking_latency_seconds": 3.2434
+        },
+        {
+            "id": "RAG-017",
+            "question": "What assumption does logistic regression make about the relationship between the logit of the event probability and predictor variables, and how can it be checked?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "6b42a11774a8bb4f67eb79d77926869f419c0cecac9f2af4279bb664a2dc4456",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "6b42a11774a8bb4f67eb79d77926869f419c0cecac9f2af4279bb664a2dc4456",
+                "a8d33feae35aa5293764cc04e4b90c1512122defd6dbaf81162f84b86c24c5ce",
+                "51d9f9b3693cf2e63c6110348fc32661e981ecf80872cf94801c6b898b6e0704",
+                "f1d1bc1c3556553214d025865656a9cd5994f4bf41c6c6997fc0c92ff8d0749b",
+                "7efcdef0712db4f6a8afe878946edd97561008ce2e95a31f9fcedb31dfe6ee68",
+                "a6035507d803fec94eb90d88175e8e32e7a99dd58aae0d3ae68451bafe7e62d0",
+                "9b396fd310f07680b4302a2e07d11fe0e20d61b510f41fded002077e0680c589",
+                "ec494c5bb656a81fc3f7a309d4998b6f3942fb43286a144b9ae161f40a3a2ea6",
+                "9ea2c8dd71c7b3dcf864a67c613307550bc45159add5d54845bd367265117b36",
+                "56410faf0931df649c90f8b9b9fa8a35b68229191266e4f513955ff10bbd6a3f",
+                "2d6c6bc36bd126dde5fedbdcdc82931875b1fbfe4e598f50692edc6a90970cf2",
+                "8bc30fa18bd229b19566b2c969d1c48f022a2133d98aecdcd9918476123cccb4",
+                "3a38fd84017d2a302f5197aa4799da5675e53598dda94e1e0f20884771916fd8",
+                "622574b137c21dbc5d279ec7b1d1d9d4438a59c2fcdca8d1a7fc9305c9849dd2",
+                "02d5aa26676fc2ea687c7d3f40bd4addecccb2d064805d084fc3bcb1d380091d",
+                "36c9d4a8b2148dfda44b48522df54b6ea4fb6eca608dea3957fbeb8f9e1f2d58",
+                "67d917537e5e8f95a0049b462be530aa694af607c1ea2dfaf948efee0b81d27f",
+                "07661c58fe7270bd8f05ae5f794769a533f50bfd051bff8fdc2b9707afd0b8de",
+                "cb0c09a440a6a75a7b1f7e245bd37e3ab975b8bc8d0f6683074c88aa890f2abc",
+                "834ebd5b583aa2e719097827bf26c319ebc90a262841548e7ed4abd5459343b3"
+            ],
+            "reranked_chunk_ids": [
+                "6b42a11774a8bb4f67eb79d77926869f419c0cecac9f2af4279bb664a2dc4456",
+                "67d917537e5e8f95a0049b462be530aa694af607c1ea2dfaf948efee0b81d27f",
+                "7efcdef0712db4f6a8afe878946edd97561008ce2e95a31f9fcedb31dfe6ee68",
+                "a8d33feae35aa5293764cc04e4b90c1512122defd6dbaf81162f84b86c24c5ce",
+                "36c9d4a8b2148dfda44b48522df54b6ea4fb6eca608dea3957fbeb8f9e1f2d58"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.7255,
+            "reranking_latency_seconds": 3.2875
+        },
+        {
+            "id": "RAG-018",
+            "question": "A linear model has dependent variable y, one continuous predictor with a quadratic term, one three-level categorical predictor, and an interaction between the categorical and continuous predictors. How many parameters, including the intercept, are required?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "993846bf7253d5959f388b310f0a2bc58bd37c540354bde3b14ad20004d59264",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "993846bf7253d5959f388b310f0a2bc58bd37c540354bde3b14ad20004d59264",
+                "3d8bb6ad9cb07b25c1690f6cd68ce8f7c4893268f2519d87e4bc2a42743c2bed",
+                "c9af5f88e45664298693c665b1045e3daaae758915eb6ef486047f57495a36f2",
+                "b1e67fad758fa8f257f46699e145430586256c3da32b8ed76206be3256cf5d58",
+                "b5199bb0576ed611e4c9c72b59930de9c9f26defae6b5938643373fff29769d1",
+                "85f118437f17013b0fb0728e271a461b6a9c226dd4a32783b806d4de2956c0fd",
+                "d993bf494b6f4e91572965add1af164290bec92c038da10b441c563bff6960dc",
+                "821f66707c48fc76456ada7de78f7eec2416b05508dd923135e54ec939143fe6",
+                "e9b344c02beda35368cfc73f4db431ae7bcdad825814e78d4e59af9f80966314",
+                "2a0b1edf92a5e7a9c57cb68e0034743e779a20da125665063e22351c55c9169e",
+                "22806a9eb2d6b0a61a832bf40ca708ea5a0ab06a259a5c6a209db5de72d0aca3",
+                "c8896f0b99e88064e68e126aa2cf483de8efbe26219eee534e69003afd8ed174",
+                "94d05591bbfcaca077503aa9e80d6e87de28b0b0dbd12b1c270f91b4116c379d",
+                "507f0ae6edfe0c556deb13eec00a0ee9d346413fecc1af4f3f789d18b03ab31d",
+                "04ea474a80726a83065296fe2eba1d364dc348b73cffe5731cfc30fadcdb4fb5",
+                "23a02d718a2f68e4dc1f07e72fe915303d0e7ed919c9085dbeef5f334d16dd14",
+                "8a3754dc6a66d39a26e33bb61b0ba8cfa90406a4f66acf76f72af08aabbd7dd6",
+                "1102e688652bdff148836fe32e0e4cf9670eab93db8c324bed63e7cebe3a48ac",
+                "9c0d7be3ae0c0d3dd34fcb48cad5c17a6cff7a41fbefb13383db2715e6b7fa7a",
+                "c42a9d98578f952ba3b77c2d7e20f4c01dd0e4ad279b275336d675215ff3e702"
+            ],
+            "reranked_chunk_ids": [
+                "993846bf7253d5959f388b310f0a2bc58bd37c540354bde3b14ad20004d59264",
+                "b1e67fad758fa8f257f46699e145430586256c3da32b8ed76206be3256cf5d58",
+                "3d8bb6ad9cb07b25c1690f6cd68ce8f7c4893268f2519d87e4bc2a42743c2bed",
+                "507f0ae6edfe0c556deb13eec00a0ee9d346413fecc1af4f3f789d18b03ab31d",
+                "85f118437f17013b0fb0728e271a461b6a9c226dd4a32783b806d4de2956c0fd"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.7241,
+            "reranking_latency_seconds": 3.7432
+        },
+        {
+            "id": "RAG-019",
+            "question": "In the described multiple-imputation workflow, what is the purpose of applying the MCMC method to continuous variables?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "0e055ce9b8e75de25c2b82ac260a4bae66f94be05af821be185f781bfb657082",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "e26bc72a2d4e91035c31033b6017c5eff8b3bfb580943fdc9732a46c885c9aba",
+                "0e055ce9b8e75de25c2b82ac260a4bae66f94be05af821be185f781bfb657082",
+                "1bbeb1a3ce1d61672cb2ceabbf4d70e6cf094873401abba5d37de5833e7a9d5a",
+                "ef4cbe982ea855e150de3e44f3efb358a5b5501a6ac55857ccfb5b3f7f57366d",
+                "1aa567ab5e94dbe36eab04eb3bdcb7d205492d644a91dd5a2d6b3b378a0691cb",
+                "170fc76e2dfc463940ac7e5c9c7709f870d4514a1650704d9b985d03c4a8ced6",
+                "0a098af413ddacf90d9184d502898a0469eb641d39931e49e3bfa68271bc5d07",
+                "b1e9bca97b38ee0572999eb67d67143556396a5ed0ba05807ed1d67254131a3b",
+                "3d1c5917b80e5e327eb77b90a18f83f447216a817971e1442a7973ba44061ce1",
+                "3cc705d12f357485ca3ca65038c3dc90a7273956095ebf55093ddbb14b8c3515",
+                "d131eb998d27a2df34b1ef71af56fba0dd44e412ea989fe4715355a23ef760b1",
+                "9d5a81d9fbbc50d7694ad426683f7d9490bde0942783fa2d702ca913aa1fbde5",
+                "e64729781b5e036c802a87c27d9a31655278d0d869d23dbfcc6bac299d9d7b3e",
+                "bb86c926fad76ce22157cf93e960b719daf2a165efe7d4991307821331ab429e",
+                "5862899575cae15b4047155d39dec30dbbf2e3c578a5a8ba5a063c3478433c05",
+                "f065047cea2806e8022e9950af898e6631d9e678a83a55bf8edb2907a943dcff",
+                "ff55abf022db71a12f1d4f003106cd4e43819feb0a90b447e2da6d00922c8b39",
+                "a3a1adb1931d6620453031fb30de894a8db7f3b2f6c683202bc082c96e44f861",
+                "2d100c77546cf6945dee468fb72388c679737a644d55c9e07f5006e63edd24ff",
+                "8e0438ea88089a293c134b20be5fb4d5f4c7330c63cb4ee8b0495a427127aeaa"
+            ],
+            "reranked_chunk_ids": [
+                "0e055ce9b8e75de25c2b82ac260a4bae66f94be05af821be185f781bfb657082",
+                "170fc76e2dfc463940ac7e5c9c7709f870d4514a1650704d9b985d03c4a8ced6",
+                "e26bc72a2d4e91035c31033b6017c5eff8b3bfb580943fdc9732a46c885c9aba",
+                "3d1c5917b80e5e327eb77b90a18f83f447216a817971e1442a7973ba44061ce1",
+                "3cc705d12f357485ca3ca65038c3dc90a7273956095ebf55093ddbb14b8c3515"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 0.5,
+                "ndcg_at_k": 0.6309297535714575,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 2,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.7069,
+            "reranking_latency_seconds": 2.7435
+        },
+        {
+            "id": "RAG-020",
+            "question": "According to the sparse retrieval test document, what does hybrid retrieval combine, and how many candidate chunks and final results are used in its retrieval pipeline?",
+            "expected_chunks": [
+                {
+                    "chunk_id": "77d34e6b8799772d02fc40eff35fd9a7f8b614aaaca3057bf9b1aca1c85f4c1c",
+                    "relevance": 3
+                }
+            ],
+            "initial_retrieved_chunk_ids": [
+                "77d34e6b8799772d02fc40eff35fd9a7f8b614aaaca3057bf9b1aca1c85f4c1c",
+                "da6a199b2614af02dc36f444678dbb59d294603a3e245a7d1c25a3b33d291b4e",
+                "d660da006000dc1379cbe00b6acddab27d53d70d3de22bc86d925987ebe91552",
+                "51b6c00c57b98c36f49a290aed6d6f40fe621b11316499ce31ad12d767c3df58",
+                "fbe107452aa22e9067ffe833678ec63ff051e6f7bb5bd492d749875991a23725",
+                "91258c8cbff477ed7aec58685c8ad4b51ff86bdf094ba8b181c8c253e7c91124",
+                "c52e216cfb60360eb0e8e1a73757f6a326814a05c4317c938fe62580def08fee",
+                "afa2f6ee13fa8dd0f4bdbef9af7428c7d69b302819deb5585b893a4aea53d7cf",
+                "96f4a2e3e95bf1e3a12de902a0f070c2f6fcb434e2ffd188d5e6930f3c7f1d52",
+                "a3a1adb1931d6620453031fb30de894a8db7f3b2f6c683202bc082c96e44f861",
+                "6a68377bad32e4399506556a7ca29caf3a0cad1622c17bd60bc98c78eccd2421",
+                "ad880dc3d7ecd9234fc4e1627f1b8eff91e5fcd5f076259058270c52ee80649c",
+                "7e43799f05e4a91cd37d2208ff50a704da6dbef8a2da81744204b31b02c98a5e",
+                "d983b45471d15102de75020f6df55041ca172f229997629ce04b991903fcc15a",
+                "f083ef2b2356d0e8dcfb822e069330120113f3c52a787638bea6fda155f4b493",
+                "c67656ce646ce00e49e761d2a5aa90f1fe9925af1250886fc7e0cf60c6dba016",
+                "10e5b509ec3a666a2a2338fcbae9a465f7509a4ae431130fe49109a9ff33020c",
+                "920cdae4fa8a9f9b095043a48268700acff432c336204ad6a2b9a659ecc57766",
+                "40bd139454745267278f4104a073efdfdcbb6dbcb437ac63d01ad0de44ec95d7",
+                "f0d4b6f3a74c468d5c822ddd7609e546708a2e4b65d1fb367bae8cfb0524a05d"
+            ],
+            "reranked_chunk_ids": [
+                "77d34e6b8799772d02fc40eff35fd9a7f8b614aaaca3057bf9b1aca1c85f4c1c",
+                "da6a199b2614af02dc36f444678dbb59d294603a3e245a7d1c25a3b33d291b4e",
+                "d660da006000dc1379cbe00b6acddab27d53d70d3de22bc86d925987ebe91552",
+                "10e5b509ec3a666a2a2338fcbae9a465f7509a4ae431130fe49109a9ff33020c",
+                "ad880dc3d7ecd9234fc4e1627f1b8eff91e5fcd5f076259058270c52ee80649c"
+            ],
+            "initial_metrics": {
+                "precision_at_k": 0.05,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 20
+            },
+            "reranked_metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "reciprocal_rank": 1.0,
+                "ndcg_at_k": 1.0,
+                "relevant_retrieved": 1,
+                "relevant_total": 1,
+                "first_relevant_rank": 1,
+                "retrieved_count": 5
+            },
+            "retrieval_latency_seconds": 0.578,
+            "reranking_latency_seconds": 6.6272
+        }
+    ]
+}
