@@ -1,7 +1,9 @@
+
 import logging
+
 from backend.config.settings import CHAT_MODEL
 from backend.agents.state import AgentState
-from backend.services.llm_service import get_openai_client
+from backend.services.llm_service import create_traced_response
 
 
 logger = logging.getLogger(__name__)
@@ -139,10 +141,8 @@ RETRIEVED DOCUMENT CONTEXT:
 {document_context}
 """
 
-        # Step 6: Call the existing OpenAI client.
-        client = get_openai_client()
-
-        response = client.responses.create(
+        # Step 6: Generate response with Langfuse tracing.
+        response = create_traced_response(
             model=CHAT_MODEL,
             instructions=instructions,
             input=input_text,

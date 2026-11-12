@@ -5,12 +5,16 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from dotenv import load_dotenv
+
+# Load environment variables before importing backend services.
+load_dotenv(PROJECT_ROOT / ".env")
+
 import json
 import time
 from datetime import datetime
 from statistics import mean
 
-from dotenv import load_dotenv
 from langchain_qdrant import (
     QdrantVectorStore,
     FastEmbedSparse,
@@ -29,7 +33,6 @@ from benchmarking.evaluation.evaluators.evaluation_history import (
     record_evaluation
 )
 
-load_dotenv()
 
 # --------------------------------------------------
 # CONFIGURATION
@@ -51,6 +54,7 @@ DATASET_PATH = Path(
 REPORT_DIR = Path(
     "benchmarking/evaluation/reports"
 )
+
 
 # --------------------------------------------------
 # INITIALIZE QDRANT AND EMBEDDINGS
@@ -121,6 +125,7 @@ print("Retrieval method:", RETRIEVAL_METHOD)
 print("Initial Top K:", RETRIEVAL_TOP_K)
 print("Final Top K:", FINAL_TOP_K)
 
+
 # --------------------------------------------------
 # LOAD GOLDEN DATASET
 # --------------------------------------------------
@@ -133,6 +138,7 @@ with open(DATASET_PATH, "r", encoding="utf-8") as f:
     ]
 
 print("\nEvaluation questions:", len(evaluation_records))
+
 
 # --------------------------------------------------
 # RUN EVALUATION
@@ -224,6 +230,7 @@ for index, record in enumerate(evaluation_records, start=1):
         reranked_metrics["recall_at_k"]
     )
 
+
 # --------------------------------------------------
 # AGGREGATE METRICS
 # --------------------------------------------------
@@ -263,6 +270,7 @@ average_reranking_latency = mean(
     for item in results
 )
 
+
 # --------------------------------------------------
 # SAVE REPORT
 # --------------------------------------------------
@@ -301,11 +309,13 @@ report = {
 with open(report_path, "w", encoding="utf-8") as f:
     json.dump(report, f, indent=4, ensure_ascii=False)
 
+
 # Update evaluation history without affecting the benchmark result.
 try:
     record_evaluation(report_path)
 except Exception as exc:
     print(f"WARNING: Could not update evaluation history: {exc}")
+
 
 # --------------------------------------------------
 # FINAL SUMMARY

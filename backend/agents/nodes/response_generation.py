@@ -1,7 +1,9 @@
+
 import logging
+
 from backend.config.settings import CHAT_MODEL
 from backend.agents.state import AgentState
-from backend.services.llm_service import get_openai_client
+from backend.services.llm_service import create_traced_response
 from backend.services.source_service import get_unique_reranked_chunks
 
 
@@ -166,10 +168,8 @@ VALIDATION FEEDBACK:
 {validation_feedback if validation_feedback else "This is the initial response. No validation feedback."}
 """
 
-        # Step 9: Call the existing OpenAI client.
-        client = get_openai_client()
-
-        response = client.responses.create(
+        # Step 9: Generate response with Langfuse tracing.
+        response = create_traced_response(
             model=CHAT_MODEL,
             instructions=instructions,
             input=input_text,

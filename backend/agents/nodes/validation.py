@@ -1,10 +1,12 @@
 
 import json
 import logging
+
 from backend.config.settings import CHAT_MODEL
 from backend.agents.state import AgentState
-from backend.services.llm_service import get_openai_client
+from backend.services.llm_service import create_traced_response
 from backend.services.source_service import get_unique_reranked_chunks
+
 
 logger = logging.getLogger(__name__)
 
@@ -165,12 +167,10 @@ RETRIEVED DOCUMENT EVIDENCE:
 {evidence_context}
 """
 
-        # Step 6: Call the existing OpenAI client
-        # using Structured Outputs.
+        # Step 6: Generate structured validation response
+        # with Langfuse tracing.
 
-        client = get_openai_client()
-
-        response = client.responses.create(
+        response = create_traced_response(
             model=CHAT_MODEL,
             instructions=instructions,
             input=input_text,
@@ -221,7 +221,13 @@ RETRIEVED DOCUMENT EVIDENCE:
         is_valid = validation_result["is_valid"]
         issues = validation_result["issues"]
         reason = validation_result["reason"]
-        logger.info("Validation details | Valid: %s | Reason: %s | Issues: %s",is_valid,reason,issues)
+
+        logger.info(
+            "Validation details | Valid: %s | Reason: %s | Issues: %s",
+            is_valid,
+            reason,
+            issues
+        )
 
         # Validate the returned field types.
 
@@ -232,7 +238,9 @@ RETRIEVED DOCUMENT EVIDENCE:
             raise ValueError("issues must be a list.")
 
         if not all(isinstance(issue, str) for issue in issues):
-            raise ValueError("Every validation issue must be a string.")
+            raise ValueError(
+                "Every validation issue must be a string."
+            )
 
         if not isinstance(reason, str):
             raise ValueError("reason must be a string.")

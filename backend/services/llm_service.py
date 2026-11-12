@@ -1,10 +1,20 @@
+
+import logging
 import os
+
 from dotenv import load_dotenv
+from langfuse import get_client
 from openai import OpenAI
+
 from backend.config.settings import CHAT_MODEL
+
+
+logger = logging.getLogger(__name__)
+
 
 # Load environment variables from .env
 load_dotenv()
+
 
 # Initialize OpenAI client
 _client = None
@@ -33,6 +43,91 @@ def get_openai_client():
         )
 
     return _client
+
+
+def create_traced_response(
+    *,
+    model: str,
+    max_output_tokens: int,
+    **kwargs
+):
+    """
+    Generate an OpenAI response and record generation
+    metadata and token usage in Langfuse.
+
+    Prompt and response content are not sent to Langfuse.
+    Additional OpenAI parameters are passed through unchanged.
+    """
+
+    client = get_openai_client()
+    langfuse = get_client()
+
+    with langfuse.start_as_current_observation(
+        as_type="generation",
+        name="openai-response-generation",
+        model=model,
+        model_parameters={
+            "max_output_tokens": max_output_tokens
+        }
+    ) as generation:
+
+        try:
+            response = client.responses.create(
+                model=model,
+                max_output_tokens=max_output_tokens,
+                **kwargs
+            )
+
+            usage = getattr(response, "usage", None)
+
+            usage_details = {}
+
+            if usage:
+                input_tokens = getattr(
+                    usage,
+                    "input_tokens",
+                    None
+                )
+
+                output_tokens = getattr(
+                    usage,
+                    "output_tokens",
+                    None
+                )
+
+                total_tokens = getattr(
+                    usage,
+                    "total_tokens",
+                    None
+                )
+
+                if input_tokens is not None:
+                    usage_details["input"] = input_tokens
+
+                if output_tokens is not None:
+                    usage_details["output"] = output_tokens
+
+                if total_tokens is not None:
+                    usage_details["total"] = total_tokens
+
+            generation.update(
+                usage_details=usage_details or None
+            )
+
+            return response
+
+        except Exception as exc:
+
+            generation.update(
+                level="ERROR",
+                status_message=str(exc)
+            )
+
+            logger.exception(
+                "OpenAI response generation failed."
+            )
+
+            raise
 
 
 def generate_answer(
@@ -180,12 +275,10 @@ CURRENT USER QUESTION:
 """
 
     # --------------------------------------------------
-    # Step 6: Generate answer using OpenAI
+    # Step 6: Generate answer with Langfuse tracing
     # --------------------------------------------------
 
-    client = get_openai_client()
-
-    response = client.responses.create(
+    response = create_traced_response(
         model=CHAT_MODEL,
         instructions=instructions,
         input=input_text,
