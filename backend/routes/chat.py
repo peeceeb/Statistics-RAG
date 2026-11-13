@@ -1,4 +1,5 @@
 
+import logging
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -17,12 +18,15 @@ from backend.services.chat_service import generate_chat_response
 
 from backend.repositories.conversation_repository import (
     get_user_conversations,
-    get_or_create_conversation
+    get_user_conversation
 )
 
 from backend.repositories.message_repository import (
     get_conversation_messages
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 router = APIRouter(
@@ -71,6 +75,17 @@ def query_chat(
             detail=str(exc)
         )
 
+    except Exception:
+
+        logger.exception(
+            "Unexpected error while processing chat request"
+        )
+
+        raise HTTPException(
+            status_code=500,
+            detail="An internal server error occurred while processing your request."
+        )
+
 
 # --------------------------------------------------
 # 2. Retrieve User Conversations
@@ -85,20 +100,33 @@ def list_conversations(
     db: Session = Depends(get_db)
 ):
 
-    conversations = get_user_conversations(
-        db=db,
-        user_id=user_id
-    )
+    try:
 
-    return [
-        ConversationResponse(
-            conversation_id=str(conversation.id),
-            title=conversation.title,
-            created_at=conversation.created_at.isoformat(),
-            updated_at=conversation.updated_at.isoformat()
+        conversations = get_user_conversations(
+            db=db,
+            user_id=user_id
         )
-        for conversation in conversations
-    ]
+
+        return [
+            ConversationResponse(
+                conversation_id=str(conversation.id),
+                title=conversation.title,
+                created_at=conversation.created_at.isoformat(),
+                updated_at=conversation.updated_at.isoformat()
+            )
+            for conversation in conversations
+        ]
+
+    except Exception:
+
+        logger.exception(
+            "Unexpected error while retrieving user conversations"
+        )
+
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to retrieve conversations."
+        )
 
 
 # --------------------------------------------------
@@ -120,19 +148,21 @@ def list_conversation_messages(
         # Validate conversation ID
         conversation_uuid = UUID(conversation_id)
 
-        # Verify conversation ownership
-        conversation = get_or_create_conversation(
+        # Retrieve existing conversation and verify ownership
+        conversation = get_user_conversation(
             db=db,
             user_id=user_id,
-            conversation_id=str(conversation_uuid)
+            conversation_id=conversation_uuid
         )
 
+        # Handle missing conversation
         if conversation is None:
             raise HTTPException(
-            status_code=404,
-            detail="Conversation not found."
+                status_code=404,
+                detail="Conversation not found."
             )
 
+        # Retrieve conversation messages
         messages = get_conversation_messages(
             db=db,
             conversation_id=conversation.id,
@@ -149,6 +179,9 @@ def list_conversation_messages(
             for message in messages
         ]
 
+    except HTTPException:
+        raise
+
     except PermissionError as exc:
 
         raise HTTPException(
@@ -161,4 +194,15 @@ def list_conversation_messages(
         raise HTTPException(
             status_code=400,
             detail="Invalid conversation ID."
+        )
+
+    except Exception:
+
+        logger.exception(
+            "Unexpected error while retrieving conversation messages"
+        )
+
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to retrieve conversation messages."
         )

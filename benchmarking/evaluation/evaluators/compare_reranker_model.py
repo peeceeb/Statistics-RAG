@@ -17,7 +17,6 @@ from langchain_qdrant import (
 from langchain_openai import OpenAIEmbeddings
 from qdrant_client import QdrantClient
 from flashrank import Ranker, RerankRequest
-from sentence_transformers import CrossEncoder
 
 
 # --------------------------------------------------
@@ -35,7 +34,6 @@ QUERY = (
 )
 
 FLASHRANK_MODEL = "ms-marco-MiniLM-L-12-v2"
-BGE_MODEL = "BAAI/bge-reranker-base"
 
 RETRIEVAL_TOP_K = 20
 
@@ -200,7 +198,7 @@ vector_db = QdrantVectorStore(**options)
 # 6. Retrieve Candidates Once
 # --------------------------------------------------
 
-print("\nRetrieving Q3 candidates...")
+print("\nRetrieving candidates...")
 
 retrieval_start = time.perf_counter()
 
@@ -222,7 +220,7 @@ candidate_ids = [get_chunk_id(doc) for doc in documents]
 if len(candidate_ids) != len(set(candidate_ids)):
     raise RuntimeError(
         "Duplicate chunk IDs detected. "
-        "Comparison stopped to preserve candidate integrity."
+        "Evaluation stopped to preserve candidate integrity."
     )
 
 print("Retrieved candidates:", len(documents))
@@ -236,7 +234,7 @@ print(
 
 
 # --------------------------------------------------
-# 7. Prepare Identical Candidate Text
+# 7. Prepare FlashRank Passages
 # --------------------------------------------------
 
 passages = [
@@ -246,12 +244,6 @@ passages = [
         "meta": doc.metadata
     }
     for index, doc in enumerate(documents)
-]
-
-# Both rerankers use the same candidate order and text.
-candidate_pairs = [
-    (QUERY, passage["text"])
-    for passage in passages
 ]
 
 
@@ -293,49 +285,11 @@ flashrank_metrics = print_results(
 
 
 # --------------------------------------------------
-# 9. BGE Evaluation
-# --------------------------------------------------
-
-print("\nLoading BGE CrossEncoder...")
-
-bge = CrossEncoder(BGE_MODEL)
-
-print("\nRunning BGE inference...")
-
-start = time.perf_counter()
-
-bge_scores = bge.predict(
-    candidate_pairs,
-    batch_size=8,
-    show_progress_bar=True
-)
-
-bge_latency = time.perf_counter() - start
-
-bge_order = sorted(
-    range(len(bge_scores)),
-    key=lambda index: float(bge_scores[index]),
-    reverse=True
-)
-
-bge_results = [
-    documents[index]
-    for index in bge_order
-]
-
-bge_metrics = print_results(
-    "BGE RERANKER RESULTS",
-    bge_results,
-    bge_latency
-)
-
-
-# --------------------------------------------------
-# 10. Comparison Summary
+# 9. Evaluation Summary
 # --------------------------------------------------
 
 print("\n" + "=" * 80)
-print("FLASHRANK VS BGE COMPARISON")
+print("FLASHRANK EVALUATION SUMMARY")
 print("=" * 80)
 
 comparison = {
@@ -344,12 +298,6 @@ comparison = {
         "inference_latency_seconds": round(
             flashrank_latency, 4
         )
-    },
-    "bge": {
-        **bge_metrics,
-        "inference_latency_seconds": round(
-            bge_latency, 4
-        )
     }
 }
 
@@ -357,7 +305,7 @@ print(json.dumps(comparison, indent=4))
 
 
 # --------------------------------------------------
-# 11. Save Report
+# 10. Save Report
 # --------------------------------------------------
 
 report = {
@@ -371,8 +319,7 @@ report = {
     "candidate_chunk_ids": candidate_ids,
     "expected_chunk_ids": sorted(EXPECTED_CHUNKS),
     "flashrank_model": FLASHRANK_MODEL,
-    "bge_model": BGE_MODEL,
-    "comparison": comparison
+    "evaluation": comparison
 }
 
 report_directory = (
@@ -391,14 +338,14 @@ timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 report_path = (
     report_directory
-    / f"reranker_comparison_{timestamp}.json"
+    / f"flashrank_evaluation_{timestamp}.json"
 )
 
 with open(report_path, "w", encoding="utf-8") as file:
     json.dump(report, file, indent=4)
 
-print("\nComparison report saved:")
+print("\nEvaluation report saved:")
 print(report_path)
 
-print("\nReranker comparison completed.")
+print("\nFlashRank evaluation completed.")
 print("No production data or production code was modified.")

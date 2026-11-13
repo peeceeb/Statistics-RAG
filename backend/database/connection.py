@@ -1,22 +1,22 @@
 
-import os
-
-from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
+from backend.config.settings import DATABASE_URL
 
-# Load environment variables
-load_dotenv()
 
-# Read PostgreSQL connection URL
-DATABASE_URL = os.getenv("DATABASE_URL")
+# --------------------------------------------------
+# Database Configuration
+# --------------------------------------------------
 
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL is missing from .env")
 
 
-# Create SQLAlchemy engine
+# --------------------------------------------------
+# SQLAlchemy Engine
+# --------------------------------------------------
+
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,
@@ -24,7 +24,10 @@ engine = create_engine(
 )
 
 
-# Create database session factory
+# --------------------------------------------------
+# Database Session Factory
+# --------------------------------------------------
+
 SessionLocal = sessionmaker(
     bind=engine,
     autoflush=False,
@@ -32,12 +35,18 @@ SessionLocal = sessionmaker(
 )
 
 
-# Base class for database models
+# --------------------------------------------------
+# Base Class for Database Models
+# --------------------------------------------------
+
 class Base(DeclarativeBase):
     pass
 
 
-# FastAPI database dependency
+# --------------------------------------------------
+# FastAPI Database Dependency
+# --------------------------------------------------
+
 def get_db():
 
     db = SessionLocal()
@@ -49,7 +58,10 @@ def get_db():
         db.close()
 
 
-# Test database connection
+# --------------------------------------------------
+# Test Database Connection
+# --------------------------------------------------
+
 def test_db_connection():
 
     with engine.connect() as connection:

@@ -1,22 +1,22 @@
 
 import logging
-import os
 
-from dotenv import load_dotenv
 from langfuse import get_client
 from openai import OpenAI
 
-from backend.config.settings import CHAT_MODEL
+from backend.config.settings import (
+    CHAT_MODEL,
+    OPENAI_API_KEY
+)
 
 
 logger = logging.getLogger(__name__)
 
 
-# Load environment variables from .env
-load_dotenv()
+# --------------------------------------------------
+# OpenAI Client
+# --------------------------------------------------
 
-
-# Initialize OpenAI client
 _client = None
 
 
@@ -29,21 +29,23 @@ def get_openai_client():
 
     if _client is None:
 
-        api_key = os.getenv("OPENAI_API_KEY")
-
-        if not api_key:
+        if not OPENAI_API_KEY:
             raise ValueError(
                 "OPENAI_API_KEY is missing from environment variables."
             )
 
         _client = OpenAI(
-            api_key=api_key,
+            api_key=OPENAI_API_KEY,
             timeout=60.0,
             max_retries=2
         )
 
     return _client
 
+
+# --------------------------------------------------
+# Langfuse Traced Response
+# --------------------------------------------------
 
 def create_traced_response(
     *,
@@ -129,6 +131,10 @@ def create_traced_response(
 
             raise
 
+
+# --------------------------------------------------
+# Generate Answer
+# --------------------------------------------------
 
 def generate_answer(
     user_query: str,
