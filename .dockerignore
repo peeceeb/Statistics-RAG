@@ -1,0 +1,36 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Python virtual environments
+.ragenv/
+.venv/
+venv/
+
+# Git and IDE files
+.git/
+.gitignore
+.vscode/
+.idea/
+*.code-workspace
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Database backups and local data
+backups/
+documents/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
