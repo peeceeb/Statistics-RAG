@@ -2,6 +2,19 @@
 import requests
 
 from config.settings import BACKEND_API_URL
+from authentication.auth_service import get_id_token
+
+
+def _get_auth_headers() -> dict:
+    """
+    Retrieve the Google ID token and prepare authentication headers.
+    """
+
+    token = get_id_token()
+
+    return {
+        "X-End-User-ID-Token": token
+    }
 
 
 def generate_response(
@@ -26,6 +39,7 @@ def generate_response(
         response = requests.post(
             url,
             json=payload,
+            headers=_get_auth_headers(),
             timeout=120
         )
 
@@ -71,6 +85,7 @@ def get_conversations(user_id: str) -> list:
         response = requests.get(
             url,
             params={"user_id": user_id},
+            headers=_get_auth_headers(),
             timeout=30
         )
 
@@ -106,6 +121,7 @@ def get_conversation_messages(
         response = requests.get(
             url,
             params={"user_id": user_id},
+            headers=_get_auth_headers(),
             timeout=30
         )
 

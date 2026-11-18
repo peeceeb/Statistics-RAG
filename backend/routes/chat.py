@@ -14,6 +14,8 @@ from backend.schemas.chat import (
 
 from backend.database.connection import get_db
 
+from backend.authentication import get_current_user
+
 from backend.services.chat_service import generate_chat_response
 
 from backend.repositories.conversation_repository import (
@@ -42,14 +44,24 @@ router = APIRouter(
 @router.post("/query", response_model=ChatResponse)
 def query_chat(
     request: ChatRequest,
+    current_user: dict = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> ChatResponse:
 
     try:
 
+        # Verify that the supplied user ID matches
+        # the identity verified by Google.
+
+        if request.user_id != current_user["user_id"]:
+            raise HTTPException(
+                status_code=403,
+                detail="Authenticated user does not match the requested user."
+            )
+
         result = generate_chat_response(
             db=db,
-            user_id=request.user_id,
+            user_id=current_user["user_id"],
             conversation_id=request.conversation_id,
             user_query=request.query
         )
@@ -60,6 +72,9 @@ def query_chat(
             sources=result["sources"],
             status=result["status"]
         )
+
+    except HTTPException:
+        raise
 
     except PermissionError as exc:
 
@@ -97,14 +112,23 @@ def query_chat(
 )
 def list_conversations(
     user_id: str,
+    current_user: dict = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
 
     try:
 
+        # Verify authenticated user identity.
+
+        if user_id != current_user["user_id"]:
+            raise HTTPException(
+                status_code=403,
+                detail="Authenticated user does not match the requested user."
+            )
+
         conversations = get_user_conversations(
             db=db,
-            user_id=user_id
+            user_id=current_user["user_id"]
         )
 
         return [
@@ -116,6 +140,9 @@ def list_conversations(
             )
             for conversation in conversations
         ]
+
+    except HTTPException:
+        raise
 
     except Exception:
 
@@ -140,29 +167,42 @@ def list_conversations(
 def list_conversation_messages(
     conversation_id: str,
     user_id: str,
+    current_user: dict = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
 
     try:
 
-        # Validate conversation ID
+        # Verify authenticated user identity.
+
+        if user_id != current_user["user_id"]:
+            raise HTTPException(
+                status_code=403,
+                detail="Authenticated user does not match the requested user."
+            )
+
+        # Validate conversation ID.
+
         conversation_uuid = UUID(conversation_id)
 
-        # Retrieve existing conversation and verify ownership
+        # Retrieve existing conversation and verify ownership.
+
         conversation = get_user_conversation(
             db=db,
-            user_id=user_id,
+            user_id=current_user["user_id"],
             conversation_id=conversation_uuid
         )
 
-        # Handle missing conversation
+        # Handle missing conversation.
+
         if conversation is None:
             raise HTTPException(
                 status_code=404,
                 detail="Conversation not found."
             )
 
-        # Retrieve conversation messages
+        # Retrieve conversation messages.
+
         messages = get_conversation_messages(
             db=db,
             conversation_id=conversation.id,
