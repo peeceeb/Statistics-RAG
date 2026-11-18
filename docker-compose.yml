@@ -1,0 +1,75 @@
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: enterprise-rag-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: Enterprise_RAG
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DOCKER_POSTGRES_PASSWORD:?Add DOCKER_POSTGRES_PASSWORD to .env}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./backups/postgresql:/backups:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d Enterprise_RAG"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - app_network
+
+  backend:
+    image: enterprise-rag-backend:local
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: enterprise-rag-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:${DOCKER_POSTGRES_PASSWORD}@postgres:5432/Enterprise_RAG
+      QDRANT_URL: http://enterprise-rag-qdrant:6333
+      INSTANCE_CONNECTION_NAME: ""
+      QDRANT_API_KEY: ""
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app_network
+      - qdrant_network
+
+  frontend:
+    image: enterprise-rag-frontend:local
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: enterprise-rag-frontend
+    restart: unless-stopped
+    environment:
+      BACKEND_API_URL: http://backend:8000
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./.streamlit/secrets.toml:/app/.streamlit/secrets.toml:ro
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+    name: enterprise_rag_postgres_data
+
+networks:
+  app_network:
+    driver: bridge
+  qdrant_network:
+    name: enterprise_rag_network
+    external: true

@@ -8,7 +8,7 @@ from qdrant_client import QdrantClient
 
 from backend.routes.chat import router as chat_router
 from backend.database.connection import engine
-from backend.config.settings import QDRANT_URL
+from backend.config.settings import QDRANT_URL, QDRANT_API_KEY
 
 
 # --------------------------------------------------
@@ -31,6 +31,7 @@ HEALTH_CHECK_COLLECTION = "Internal_Docs"
 
 qdrant_health_client = QdrantClient(
     url=QDRANT_URL,
+    api_key=QDRANT_API_KEY,
     timeout=3
 )
 

@@ -39,3 +39,21 @@ def get_user_details() -> dict:
         "email": st.user.get("email"),
         "picture": st.user.get("picture")
     }
+
+def get_id_token() -> str:
+    """
+    Retrieve the Google ID token for the authenticated user.
+    """
+
+    if not is_authenticated():
+        raise RuntimeError("User is not authenticated.")
+
+    token = st.user.tokens.get("id")
+
+    if not token:
+        raise RuntimeError(
+            "Google ID token is unavailable. "
+            "Check Streamlit expose_tokens configuration."
+        )
+
+    return token

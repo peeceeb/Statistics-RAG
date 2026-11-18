@@ -23,6 +23,11 @@ CHAT_MODEL = os.getenv(
     "gpt-5.5"
 )
 
+# --------------------------------------------------
+# Google Authentication Configuration
+# --------------------------------------------------
+
+GOOGLE_OAUTH_CLIENT_ID = os.getenv("GOOGLE_OAUTH_CLIENT_ID")
 
 # --------------------------------------------------
 # PostgreSQL Configuration
@@ -36,9 +41,11 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 # --------------------------------------------------
 
 # Local development defaults to the dedicated Enterprise_RAG instance.
-# Docker deployment can override this through environment variables.
+# Cloud deployment overrides these through environment variables.
 
 QDRANT_URL = os.getenv(
     "QDRANT_URL",
     "http://localhost:6334"
 )
+
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")

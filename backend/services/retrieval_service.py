@@ -8,10 +8,16 @@ from langchain_openai import OpenAIEmbeddings
 from qdrant_client import QdrantClient
 from langfuse import get_client, observe
 
-from backend.config.settings import QDRANT_URL
+from backend.config.settings import (
+    QDRANT_URL,
+    QDRANT_API_KEY
+)
 
 
+# --------------------------------------------------
 # Configuration
+# --------------------------------------------------
+
 COLLECTION_NAME = "Internal_Docs"
 
 RETRIEVAL_TOP_K = 20
@@ -20,11 +26,27 @@ EMBEDDING_MODEL = "text-embedding-3-large"
 SPARSE_MODEL = "Qdrant/bm25"
 
 
+# --------------------------------------------------
+# Validate Qdrant Configuration
+# --------------------------------------------------
+
+if QDRANT_URL.startswith("https://") and not QDRANT_API_KEY:
+    raise ValueError(
+        "QDRANT_API_KEY is required when connecting to Qdrant Cloud."
+    )
+
+
+# --------------------------------------------------
 # Initialize Langfuse
+# --------------------------------------------------
+
 langfuse = get_client()
 
 
-# Initialize embeddings
+# --------------------------------------------------
+# Initialize Embeddings
+# --------------------------------------------------
+
 embedding_model = OpenAIEmbeddings(
     model=EMBEDDING_MODEL,
     request_timeout=15,
@@ -32,23 +54,34 @@ embedding_model = OpenAIEmbeddings(
 )
 
 
-# Connect to the dedicated Enterprise_RAG Qdrant instance
+# --------------------------------------------------
+# Connect to Qdrant
+# --------------------------------------------------
+
 qdrant_client = QdrantClient(
     url=QDRANT_URL,
+    api_key=QDRANT_API_KEY,
     timeout=10
 )
 
 
-# Inspect collection configuration
+# --------------------------------------------------
+# Inspect Collection Configuration
+# --------------------------------------------------
+
 collection_info = qdrant_client.get_collection(COLLECTION_NAME)
 
 configured_dense_vectors = collection_info.config.params.vectors
+
 configured_sparse_vectors = (
     collection_info.config.params.sparse_vectors or {}
 )
 
 
-# Identify the dense vector name
+# --------------------------------------------------
+# Identify Dense Vector Name
+# --------------------------------------------------
+
 if isinstance(configured_dense_vectors, dict):
 
     if "dense" in configured_dense_vectors:
@@ -67,7 +100,10 @@ else:
     dense_vector_name = ""
 
 
-# Configure vector store
+# --------------------------------------------------
+# Configure Vector Store
+# --------------------------------------------------
+
 vector_store_options = {
     "client": qdrant_client,
     "collection_name": COLLECTION_NAME,
@@ -76,7 +112,10 @@ vector_store_options = {
 }
 
 
-# Configure sparse retrieval when available
+# --------------------------------------------------
+# Configure Hybrid Retrieval
+# --------------------------------------------------
+
 if configured_sparse_vectors:
 
     sparse_vector_name = (
@@ -109,9 +148,16 @@ else:
     )
 
 
-# Initialize vector store
+# --------------------------------------------------
+# Initialize Vector Store
+# --------------------------------------------------
+
 vector_db = QdrantVectorStore(**vector_store_options)
 
+
+# --------------------------------------------------
+# Document Retrieval
+# --------------------------------------------------
 
 @observe(name="internal-document-retrieval")
 def search_documents(user_query: str):
