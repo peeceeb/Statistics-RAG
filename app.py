@@ -38,20 +38,6 @@ if not is_authenticated():
 
 # Get user information
 user = get_user_details()
-# Temporary Google ID token validation
-try:
-    google_id_token = st.user.tokens.get("id")
-    st.write(
-        "Google ID token available:",
-        bool(google_id_token)
-    )
-except Exception:
-    st.write("Google ID token available: False")
-st.write("Logged-in user details:")
-
-st.write("User ID:", user["user_id"])
-st.write("Name:", user["name"])
-st.write("Email:", user["email"])
 
 
 # Initialize chat state

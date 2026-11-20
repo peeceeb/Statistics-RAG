@@ -1,3 +1,7 @@
+import os
+
+from google.auth.transport.requests import Request
+from google.oauth2 import id_token
 
 import requests
 
@@ -7,14 +11,36 @@ from authentication.auth_service import get_id_token
 
 def _get_auth_headers() -> dict:
     """
-    Retrieve the Google ID token and prepare authentication headers.
+    Retrieve Google user authentication and, in Cloud Run,
+    service-to-service authentication.
     """
 
-    token = get_id_token()
+    user_token = get_id_token()
 
-    return {
-        "X-End-User-ID-Token": token
+    headers = {
+        "X-End-User-ID-Token": user_token
     }
+
+    # Cloud Run automatically provides K_SERVICE.
+    # Local development does not require this additional token.
+    if os.getenv("K_SERVICE"):
+
+        try:
+            service_token = id_token.fetch_id_token(
+                Request(),
+                BACKEND_API_URL.rstrip("/")
+            )
+
+            headers["Authorization"] = (
+                f"Bearer {service_token}"
+            )
+
+        except Exception as exc:
+            raise RuntimeError(
+                "Could not obtain Cloud Run service identity token."
+            ) from exc
+
+    return headers
 
 
 def generate_response(

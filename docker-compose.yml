@@ -53,7 +53,7 @@ services:
     environment:
       BACKEND_API_URL: http://backend:8000
     ports:
-      - "8501:8501"
+      - "127.0.0.1:8501:8501"
     volumes:
       - ./.streamlit/secrets.toml:/app/.streamlit/secrets.toml:ro
     depends_on:

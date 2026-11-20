@@ -13,3 +13,4 @@ __pycache__/
 .env
 # Local Qdrant backups
 backups/
+.streamlit/secrets.production.toml
